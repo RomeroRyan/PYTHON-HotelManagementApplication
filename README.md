@@ -2,6 +2,8 @@
 
 Jacob Powell - Capabilities 2 & 3 </br>
 Blue Bayani - Capabilities 5 & 7 </br>
+Ryan Romero - Capabilities 1 & 4 </br>
+Hounghuy Hourt - Capabilities 6 & 8 </br>
 
 **The hotel management software will support following capabilities:**
 - Capability 1: Screen that shows all rooms and their current status.
