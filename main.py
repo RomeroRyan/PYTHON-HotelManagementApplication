@@ -10,7 +10,7 @@ except ImportError:
         import tkinter.ttk as ttk
     except ImportError:
         print("Could not import tkinter!")
-print(dir(tk))
+
 # ============================================================================================
 # CLASSES
 # classes we may use when creating functionality to code (they do nothing atm)
@@ -92,34 +92,34 @@ root.geometry("600x400")
 '''
     This code initializes the frames(screens) that we will be using.
     WelcomeFrame is the first screen and serves no purpose other then to welcome users.
-    WelcomeFrame leads to MainFrame, which hosts the tab system (myTabs).
-    myTabs hosts all our frames, allowing our frames to be swapped and displayed.
-        (so our capability screens are in a tab widget which is displayed on the MainFrame)
+    WelcomeFrame leads to main_frame, which hosts the tab system (my_tabs).
+    my_tabs hosts all our frames, allowing our frames to be swapped and displayed.
+        (so our capability screens are in a tab widget which is displayed on the main_frame)
         (a group of frames within a single frame)
 '''
 welcome_frame = tk.LabelFrame(root, padx=5, pady=5)
-MainFrame = tk.Frame(root)
+main_frame = tk.Frame(root)
 
 # create tab widget before creating capability frames
-myTabs = ttk.Notebook(MainFrame)
-myTabs.pack(pady=15)
+my_tabs = ttk.Notebook(main_frame)
+my_tabs.pack(pady=15)
 
 # create capability frames
-frame1 = tk.Frame(myTabs)      # capability 1
-frame2 = tk.Frame(myTabs)      # capability 2
-frame3 = tk.Frame(myTabs)      # capability 3
-frame4 = tk.Frame(myTabs)      # capability 4
-frame5 = tk.Frame(myTabs)      # capability 5
-frame6 = tk.Frame(myTabs)      # capability 6
-frame7 = tk.Frame(myTabs)      # capability 7
-frame8 = tk.Frame(myTabs)      # capability 8
+frame1 = tk.Frame(my_tabs)      # capability 1
+frame2 = tk.Frame(my_tabs)      # capability 2
+frame3 = tk.Frame(my_tabs)      # capability 3
+frame4 = tk.Frame(my_tabs)      # capability 4
+frame5 = tk.Frame(my_tabs)      # capability 5
+frame6 = tk.Frame(my_tabs)      # capability 6
+frame7 = tk.Frame(my_tabs)      # capability 7
+frame8 = tk.Frame(my_tabs)      # capability 8
 
 
 # ============================================================================================
 # WELCOME: CODE BLOCK
 def go_menu():
     welcome_frame.forget()
-    MainFrame.pack()
+    main_frame.pack()
 
 
 # WELCOME: create widgets
@@ -134,7 +134,7 @@ welcome_frame.pack(pady=125)
 # MAIN: CODE BLOCK
 
 # MAIN: create widgets
-menu_label = tk.Button(MainFrame, text="Main Menu", font=("Times", 20, "bold"))
+menu_label = tk.Button(main_frame, text="Main Menu", font=("Times", 20, "bold"))
 
 # MENU: set widgets
 menu_label.pack()
@@ -164,14 +164,14 @@ frame7.pack(fill="both", expand=1)
 frame8.pack(fill="both", expand=1)
 
 # adds frames to tab system
-myTabs.add(frame1, text="Room Status")
-myTabs.add(frame2, text="Show Rooms")
-myTabs.add(frame3, text="Reservation")
-myTabs.add(frame4, text="Housekeeping")
-myTabs.add(frame5, text="Manage Guest")
-myTabs.add(frame6, text="All Guest")
-myTabs.add(frame7, text="Search Guest")
-myTabs.add(frame8, text="Report")
+my_tabs.add(frame1, text="Room Status")
+my_tabs.add(frame2, text="Show Rooms")
+my_tabs.add(frame3, text="Reservation")
+my_tabs.add(frame4, text="Housekeeping")
+my_tabs.add(frame5, text="Manage Guest")
+my_tabs.add(frame6, text="All Guest")
+my_tabs.add(frame7, text="Search Guest")
+my_tabs.add(frame8, text="Report")
 
 # ============================================================================================
 # Ending of GUI CODE
