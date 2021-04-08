@@ -160,10 +160,11 @@ welcome_frame.pack(pady=125)
 # MAIN: CODE BLOCK
 
 # MAIN: create widgets
-menu_label = tk.Button(MainFrame, text="Main Menu", font=("Times", 20, "bold"))
+quit_label = tk.Button(MainFrame, text="Quit", font=(
+    "Times", 20, "bold"), command=root.quit)
 
 # MENU: set widgets
-menu_label.pack()
+quit_label.pack()
 # ============================================================================================
 # TODO
 
@@ -177,8 +178,6 @@ capability_five = capability_five.CapabilityFive(frame5)
 # 6
 capability_seven = capability_seven.CapabilitySeven(frame7)
 # 7
-
-
 
 
 # ============================================================================================
