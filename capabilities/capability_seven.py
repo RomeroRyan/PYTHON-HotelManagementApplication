@@ -4,7 +4,6 @@ from tkinter import *
 
 class CapabilitySeven(Frame):
     def __init__(self, frame):
-        self.frame = Tk()
         search_title = tk.Label(
             frame, text="Guest Search", font=("Times", 20, "bold"))
         search_title.grid(row=0, column=0)
