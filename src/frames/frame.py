@@ -34,9 +34,9 @@ class Frame:
         packable = {"packable": self.title, "pack_config": pack_cfg}
         self.add_packable(packable)
         
-    def add_button(self, config, pack_cfg={}):
+    def add_button(self, parent=None, config=None, pack_cfg={}):
         cnf = config or {"text": "Lorem Ipsum", "font": ("Times", 20, "bold")}
-        packable = {"packable": tk.Button(self.frame, cnf=cnf), "pack_config": pack_cfg}
+        packable = {"packable": tk.Button(parent, cnf=cnf), "pack_config": pack_cfg}
         self.add_packable(packable)
 
     def add_packable(self, packable):
@@ -50,5 +50,6 @@ class Frame:
             self.forget_frame()
         for packable in self.packables:
             packable['packable'].pack(packable['pack_config'])
+
     def forget_frame(self):
         self.frame.forget()

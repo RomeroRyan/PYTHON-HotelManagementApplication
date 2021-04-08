@@ -25,74 +25,74 @@ class MainFrame(Frame):
         capability_one_frame_config = {
             "text": "Room Status"
         }
-        capability_one = CapabilityOne(
+        self.capability_one = CapabilityOne(
                         self.notebook,
                         frame_config=capability_one_frame_config
                     )
-        self.add_tab(capability_one.get_frame(), capability_one_frame_config["text"])
+        self.add_tab(self.capability_one.get_frame(), capability_one_frame_config["text"])
 
         capability_two_frame_config = {
             "text": "Show Rooms"
         }
-        capability_two = CapabilityTwo(
+        self.capability_two = CapabilityTwo(
                         self.notebook,
                         frame_config=capability_two_frame_config
                     )
-        self.add_tab(capability_two.get_frame(), capability_two_frame_config["text"])
+        self.add_tab(self.capability_two.get_frame(), capability_two_frame_config["text"])
 
         capability_three_frame_config = {
             "text": "Reservation"
         }
-        capability_three = CapabilityThree(
+        self.capability_three = CapabilityThree(
                         self.notebook,
                         frame_config=capability_three_frame_config
                     )
-        self.add_tab(capability_three.get_frame(), capability_three_frame_config["text"])
+        self.add_tab(self.capability_three.get_frame(), capability_three_frame_config["text"])
 
         capability_four_frame_config = {
             "text": "Housekeeping"
         }
-        capability_four = CapabilityFour(
+        self.capability_four = CapabilityFour(
                         self.notebook,
                         frame_config=capability_four_frame_config
                     )
-        self.add_tab(capability_four.get_frame(), capability_four_frame_config["text"])
+        self.add_tab(self.capability_four.get_frame(), capability_four_frame_config["text"])
 
         capability_five_frame_config = {
             "text": "Manage Guest"
         }
-        capability_five = CapabilityFive(
+        self.capability_five = CapabilityFive(
                         self.notebook,
                         frame_config=capability_five_frame_config
                     )
-        self.add_tab(capability_five.get_frame(), capability_five_frame_config["text"])
+        self.add_tab(self.capability_five.get_frame(), capability_five_frame_config["text"])
 
         capability_six_frame_config = {
             "text": "All Guest"
         }
-        capability_six = CapabilitySix(
+        self.capability_six = CapabilitySix(
                         self.notebook,
                         frame_config=capability_six_frame_config
                     )
-        self.add_tab(capability_six.get_frame(), capability_six_frame_config["text"])
+        self.add_tab(self.capability_six.get_frame(), capability_six_frame_config["text"])
 
         capability_seven_frame_config = {
             "text": "Search Guest"
         }
-        capability_seven = CapabilitySeven(
+        self.capability_seven = CapabilitySeven(
                         self.notebook,
                         frame_config=capability_seven_frame_config
                     )
-        self.add_tab(capability_seven.get_frame(), capability_seven_frame_config["text"])
+        self.add_tab(self.capability_seven.get_frame(), capability_seven_frame_config["text"])
 
         capability_eight_frame_config = {
             "text": "Report"
         }
-        capability_eight = CapabilityEight(
+        self.capability_eight = CapabilityEight(
                         self.notebook,
                         frame_config=capability_eight_frame_config
                     )
-        self.add_tab(capability_eight.get_frame(), capability_eight_frame_config["text"])
+        self.add_tab(self.capability_eight.get_frame(), capability_eight_frame_config["text"])
 
     def add_notebook(self, pack_cfg={"packable": None, "pack_config": None}):
         self.notebook = ttk.Notebook(self.parent)
@@ -101,3 +101,8 @@ class MainFrame(Frame):
 
     def add_tab(self, tab, text):
         self.notebook.add(tab, text=text)
+
+    def render_frame(self, forget_frames=False):
+        self.reset_packables()
+        self.add_packable({"packable": self.notebook, "pack_cfg": {"expand": 1, "fill": "both"}})
+        self.capability_one.add_button(self.notebook, pack_cfg={"text": "Hello", 'width': 30, 'height': 30})

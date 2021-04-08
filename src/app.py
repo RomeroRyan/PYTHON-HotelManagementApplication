@@ -49,7 +49,7 @@ class App:
             "text": "Main Menu",
             "font": ("Times", 20, "bold")
         }
-        main_frame.add_button(main_frame_button_config)
+        main_frame.add_button(main_frame.frame, main_frame_button_config)
         return main_frame
 
     def create_welcome_screen(self, parent, main_menu):
@@ -67,7 +67,7 @@ class App:
             "command": welcome_frame.switch_frames
         }
 
-        welcome_frame.add_button(welcome_button_config)
+        welcome_frame.add_button(welcome_frame.frame, welcome_button_config)
         welcome_frame.render_frame()
 
     def setup(self, title, dimensions):

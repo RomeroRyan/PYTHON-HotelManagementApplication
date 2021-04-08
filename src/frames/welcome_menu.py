@@ -6,9 +6,9 @@ class WelcomeFrame(Frame):
         self.main_frame = main_frame
 
     def switch_frames(self):
-        super().get_frame().forget()
-        super().reset_packables()
+        self.get_frame().forget()
+        self.reset_packables()
         for packable in self.main_frame.packables:
-            super().add_packable(packable)
+            self.add_packable(packable)
             
-        super().render_frame(forget_frames=True)
+        self.main_frame.render_frame(forget_frames=False)

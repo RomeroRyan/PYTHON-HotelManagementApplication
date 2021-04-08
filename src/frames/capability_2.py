@@ -3,4 +3,6 @@ from src.frames.frame import Frame
 class CapabilityTwo(Frame):
     def __init__(self, parent=None, title_config=None, frame_config=None):
         super().__init__(parent, title_config=title_config, frame_config=frame_config)
-        self.add_packable({"packable": self.get_frame(), "pack_config": {"fill": "both", "expand": 1}})
+
+    def add_button(self):
+        super().add_button(super().frame, pack_cfg={"text": "Hello", 'width': 30, 'height': 30})
