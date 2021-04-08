@@ -14,6 +14,7 @@ except ImportError:
 import capabilities.capability_one as capability_one
 import capabilities.capability_two as capability_two
 import capabilities.capability_three as capability_three
+import capabilities.capability_four as capability_four
 
 
 # ============================================================================================
@@ -155,7 +156,9 @@ menu_label.pack()
 
 capability_two = capability_two.CapabilityTwo(frame2)
 capability_three = capability_three.CapabilityThree(frame3)
+capability_four = capability_four.CapabilityFour(frame4)
 capability_one = capability_one.CapabilityOne(frame1)
+
 
 
 # ============================================================================================
