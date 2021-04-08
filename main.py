@@ -11,8 +11,10 @@ except ImportError:
     except ImportError:
         print("Could not import tkinter!")
 
+import capabilities.capability_one as capability_one
 import capabilities.capability_two as capability_two
 import capabilities.capability_three as capability_three
+import capabilities.capability_four as capability_four
 import capabilities.capability_five as capability_five
 import capabilities.capability_seven as capability_seven
 
@@ -163,21 +165,20 @@ menu_label = tk.Button(MainFrame, text="Main Menu", font=("Times", 20, "bold"))
 # MENU: set widgets
 menu_label.pack()
 # ============================================================================================
-
 # TODO
-# BLOCK CODES GO HERE (look at "WELCOME: CODE BLOCK" above as an example)
-
-# CAPABILITY 2: set widgets
-
-
-# CAPABILITY 3: Guest Registration
 
 
 # BLOCK CODES GO HERE
+capability_one = capability_one.CapabilityOne(frame1)
 capability_two = capability_two.CapabilityTwo(frame2)
 capability_three = capability_three.CapabilityThree(frame3)
+capability_four = capability_four.CapabilityFour(frame4)
 capability_five = capability_five.CapabilityFive(frame5)
+# 6
 capability_seven = capability_seven.CapabilitySeven(frame7)
+# 7
+
+
 
 
 # ============================================================================================
