@@ -15,14 +15,17 @@ import capabilities.capability_one as capability_one
 import capabilities.capability_two as capability_two
 import capabilities.capability_three as capability_three
 import capabilities.capability_four as capability_four
-
+import capabilities.capability_five as capability_five
+import capabilities.capability_seven as capability_seven
 
 # ============================================================================================
 # CLASSES
 # classes we may use when creating functionality to code (they do nothing atm)
 
+
 class HotelRoom:
     """ Hotel Room Class """
+
     def __init__(self, room_num="000", room_type="King", room_status="unavailable"):
         self.room_num = room_num
         self.room_type = room_type
@@ -30,26 +33,30 @@ class HotelRoom:
 
     def get_room_num(self):
         return self.room_num
+
     def set_room_num(self, room_num):
         self.room_num = room_num
 
     def get_room_type(self):
         return self.room_type
+
     def set_room_type(self, room_type):
         self.room_type = room_type
 
     def get_room_status(self):
         return self.room_status
+
     def set_room_status(self, room_status):
         self.room_status = room_status
 
 
 class Guest:
     """ Guest Class """
+
     def __init__(
-                self, first_name="John", last_name="Smith", phone="555-555-5555",
-                address="5555 Street Ave, Ca, 55555", email="myEmail@gmail.com"
-                ):
+        self, first_name="John", last_name="Smith", phone="555-555-5555",
+        address="5555 Street Ave, Ca, 55555", email="myEmail@gmail.com"
+    ):
         self.first_name = first_name
         self.last_name = last_name
         self.phone = phone
@@ -58,31 +65,37 @@ class Guest:
 
     def get_first_name(self):
         return self.first_name
+
     def set_first_name(self, first_name):
         self.first_name = first_name
 
     def get_last_name(self):
         return self.last_name
+
     def set_last_name(self, last_name):
         self.last_name = last_name
 
     def get_phone(self):
         return self.phone
+
     def set_phone(self, phone):
         self.phone = phone
 
     def get_address(self):
         return self.address
+
     def set_address(self, address):
         self.address = address
 
     def get_email(self):
         return self.email
+
     def set_email(self, email):
         self.email = email
 
 # ============================================================================================
 # SET DEFAULTS FOR THE MAIN WINDOWS
+
 
 '''
     This code is what influences the main window that pops up as soon as the app runs.
@@ -129,8 +142,10 @@ def go_menu():
 
 
 # WELCOME: create widgets
-welcome_title = tk.Label(welcome_frame, text="Totally Legit Hotel App", font=("Times", 20, "bold"))
-welcome_button = tk.Button(welcome_frame, text="Start", padx=25, command=go_menu)
+welcome_title = tk.Label(
+    welcome_frame, text="Hotel Management App", font=("Times", 20, "bold"))
+welcome_button = tk.Button(
+    welcome_frame, text="Start", padx=25, command=go_menu)
 
 # WELCOME: set widgets
 welcome_title.pack()
@@ -152,12 +167,17 @@ menu_label.pack()
 # ============================================================================================
 # TODO
 
-# BLOCK CODES GO HERE
 
+# BLOCK CODES GO HERE
+capability_one = capability_one.CapabilityOne(frame1)
 capability_two = capability_two.CapabilityTwo(frame2)
 capability_three = capability_three.CapabilityThree(frame3)
 capability_four = capability_four.CapabilityFour(frame4)
-capability_one = capability_one.CapabilityOne(frame1)
+capability_five = capability_five.CapabilityFive(frame5)
+# 6
+capability_seven = capability_seven.CapabilitySeven(frame7)
+# 7
+
 
 
 
@@ -184,9 +204,9 @@ myTabs.add(frame1, text="Room Status")
 myTabs.add(frame2, text="Show Rooms")
 myTabs.add(frame3, text="Reservation")
 myTabs.add(frame4, text="Housekeeping")
-myTabs.add(frame5, text="Manage Guest")
+myTabs.add(frame5, text="Guest Profile")
 myTabs.add(frame6, text="All Guest")
-myTabs.add(frame7, text="Search Guest")
+myTabs.add(frame7, text="Guest search")
 myTabs.add(frame8, text="Report")
 
 # ============================================================================================
