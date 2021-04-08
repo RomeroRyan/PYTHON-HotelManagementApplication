@@ -95,8 +95,6 @@ class Guest:
 
 # ============================================================================================
 # SET DEFAULTS FOR THE MAIN WINDOWS
-
-
 '''
     This code is what influences the main window that pops up as soon as the app runs.
     (size of window, name of window, etc)
@@ -107,7 +105,6 @@ root.title("Hotel Management App")
 root.geometry("1920x1080")
 # ============================================================================================
 # CREATE FRAMES
-
 '''
     This code initializes the frames(screens) that we will be using.
     WelcomeFrame is the first screen and serves no purpose other then to welcome users.
@@ -152,9 +149,6 @@ welcome_title.pack()
 welcome_button.pack()
 welcome_frame.pack(pady=125)
 
-# ============================================================================================
-# Capability 3 helper function
-
 
 # ============================================================================================
 # MAIN: CODE BLOCK
@@ -168,8 +162,7 @@ quit_label.pack()
 # ============================================================================================
 # TODO
 
-
-# BLOCK CODES GO HERE
+# CALL CODE INTIALIZER HERE
 capability_one = capability_one.CapabilityOne(frame1)
 capability_two = capability_two.CapabilityTwo(frame2)
 capability_three = capability_three.CapabilityThree(frame3)
