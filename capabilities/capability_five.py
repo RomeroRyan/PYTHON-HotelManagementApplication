@@ -7,7 +7,6 @@ from PIL import Image, ImageTk, ImageOps
 
 class CapabilityFive:
     def __init__(self, frame):
-        self.frame = Tk()
         profile_title = tk.Label(
             frame, text="Guest Profile", font=("Times", 20, "bold"))
         profile_title.grid(row=0, column=0)
