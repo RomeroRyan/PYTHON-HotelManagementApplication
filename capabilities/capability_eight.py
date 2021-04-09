@@ -1,12 +1,8 @@
 import tkinter as tk
 
+# Report
 class CapabilityEight:
     def __init__(self,frame):
-
-#frame = tk.Tk()
-        #frame.title('Report')
-#frame.geometry("500x500")
-
         title_label = tk.Label(frame, text="Today's Report", font=30)
         title_label.grid(row=0, column =4, columnspan =1)
 
@@ -42,4 +38,3 @@ class CapabilityEight:
 
         total_label = tk.Label(frame, text="Total: $ 1080")
         total_label.grid(row=8, column = 6)
-#frame.mainloop()

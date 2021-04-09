@@ -1,13 +1,8 @@
 import tkinter as tk
 
+# Guest Profile
 class CapabilitySix:
-    def __init__(self,frame): 
-
-        #frame = tk.Tk()
-        #frame.title('Guest profile')
-        #frame.geometry("500x500")
-#Menu
-
+    def __init__(self, frame): 
         title_label = tk.Label(frame, text="Current Guest Show Screen", bg= 'steel blue')
         title_label.grid(row=0, column = 0, columnspan =1)
 
@@ -32,7 +27,6 @@ class CapabilitySix:
         remain_label = tk.Label(frame, text="Balance:")
         remain_label.grid(row=7, column = 0)
 
-
         gname = tk.Label(frame, width=30, text="John Win",bg='#C4C4C4')
         gname.grid(row=1, column=1, padx=20)
 
@@ -53,7 +47,3 @@ class CapabilitySix:
 
         remain = tk.Label(frame, width=30, text = "$ 250", bg='#C4C4C4')
         remain.grid(row=7, column=1)
-
-
-#frame.mainloop()
-
