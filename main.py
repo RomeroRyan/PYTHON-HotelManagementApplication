@@ -17,7 +17,8 @@ import capabilities.capability_three as capability_three
 import capabilities.capability_four as capability_four
 import capabilities.capability_five as capability_five
 import capabilities.capability_seven as capability_seven
-
+import capabilities.capability_six as capability_six
+import capabilities.capability_eight as capability_eight
 # ============================================================================================
 # CLASSES
 # classes we may use when creating functionality to code (they do nothing atm)
@@ -168,9 +169,9 @@ capability_two = capability_two.CapabilityTwo(frame2)
 capability_three = capability_three.CapabilityThree(frame3)
 capability_four = capability_four.CapabilityFour(frame4)
 capability_five = capability_five.CapabilityFive(frame5)
-# 6
+capability_six = capability_six.CapabilitySix(frame6)
 capability_seven = capability_seven.CapabilitySeven(frame7)
-# 7
+capability_eight = capability_eight.CapabilityEight(frame8)
 
 
 # ============================================================================================
