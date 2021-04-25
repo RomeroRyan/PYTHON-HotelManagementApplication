@@ -19,6 +19,8 @@ import capabilities.capability_five as capability_five
 import capabilities.capability_seven as capability_seven
 import capabilities.capability_six as capability_six
 import capabilities.capability_eight as capability_eight
+
+
 # ============================================================================================
 # CLASSES
 # classes we may use when creating functionality to code (they do nothing atm)
@@ -51,12 +53,32 @@ class HotelRoom:
         self.room_status = room_status
 
 
+# List of all rooms (initialize every room in the hotel)
+roomList = [HotelRoom("101", "King", "Available"),
+            HotelRoom("102", "Queen", "Available"),
+            HotelRoom("103", "Queen Kitchen", "Available"),
+            HotelRoom("104", "Suite", "Available"),
+            HotelRoom("201", "King", "Available"),
+            HotelRoom("202", "Queen", "Available"),
+            HotelRoom("203", "Queen Kitchen", "Available"),
+            HotelRoom("204", "Suite", "Available"),
+            HotelRoom("301", "King", "Available"),
+            HotelRoom("302", "Queen", "Available"),
+            HotelRoom("303", "Queen Kitchen", "Available"),
+            HotelRoom("304", "Suite", "Available"),
+            HotelRoom("401", "King", "Available"),
+            HotelRoom("402", "Queen", "Available"),
+            HotelRoom("403", "Queen Kitchen", "Available"),
+            HotelRoom("404", "Suite", "Available"),
+            ]
+
+
 class Guest:
     """ Guest Class """
 
     def __init__(
-        self, first_name="John", last_name="Smith", phone="555-555-5555",
-        address="5555 Street Ave, Ca, 55555", email="myEmail@gmail.com"
+            self, first_name="John", last_name="Smith", phone="555-555-5555",
+            address="5555 Street Ave, Ca, 55555", email="myEmail@gmail.com"
     ):
         self.first_name = first_name
         self.last_name = last_name
@@ -94,6 +116,7 @@ class Guest:
     def set_email(self, email):
         self.email = email
 
+
 # ============================================================================================
 # SET DEFAULTS FOR THE MAIN WINDOWS
 '''
@@ -122,14 +145,14 @@ myTabs = ttk.Notebook(MainFrame)
 myTabs.pack(pady=15)
 
 # create capability frames
-frame1 = tk.Frame(myTabs)      # capability 1
-frame2 = tk.Frame(myTabs)      # capability 2
-frame3 = tk.Frame(myTabs)      # capability 3
-frame4 = tk.Frame(myTabs)      # capability 4
-frame5 = tk.Frame(myTabs)      # capability 5
-frame6 = tk.Frame(myTabs)      # capability 6
-frame7 = tk.Frame(myTabs)      # capability 7
-frame8 = tk.Frame(myTabs)      # capability 8
+frame1 = tk.Frame(myTabs)  # capability 1
+frame2 = tk.Frame(myTabs)  # capability 2
+frame3 = tk.Frame(myTabs)  # capability 3
+frame4 = tk.Frame(myTabs)  # capability 4
+frame5 = tk.Frame(myTabs)  # capability 5
+frame6 = tk.Frame(myTabs)  # capability 6
+frame7 = tk.Frame(myTabs)  # capability 7
+frame8 = tk.Frame(myTabs)  # capability 8
 
 
 # ============================================================================================
@@ -141,7 +164,7 @@ def go_menu():
 
 # WELCOME: create widgets
 welcome_title = tk.Label(
-    welcome_frame, text="Hotel Management App", font=("Times", 20, "bold"))
+    welcome_frame, text="Hotel Management App", font=("Times", 30, "bold"))
 welcome_button = tk.Button(
     welcome_frame, text="Start", padx=25, command=go_menu)
 
@@ -149,7 +172,6 @@ welcome_button = tk.Button(
 welcome_title.pack()
 welcome_button.pack()
 welcome_frame.pack(pady=125)
-
 
 # ============================================================================================
 # MAIN: CODE BLOCK
@@ -161,10 +183,9 @@ quit_label = tk.Button(MainFrame, text="Quit", font=(
 # MENU: set widgets
 quit_label.pack()
 # ============================================================================================
-# TODO
 
-# CALL CODE INTIALIZER HERE
-capability_one = capability_one.CapabilityOne(frame1)
+# CALL CODE INITIALIZER HERE
+capability_one = capability_one.CapabilityOne(frame1, roomList, myTabs, frame6)
 capability_two = capability_two.CapabilityTwo(frame2)
 capability_three = capability_three.CapabilityThree(frame3)
 capability_four = capability_four.CapabilityFour(frame4)
@@ -172,7 +193,6 @@ capability_five = capability_five.CapabilityFive(frame5)
 capability_six = capability_six.CapabilitySix(frame6)
 capability_seven = capability_seven.CapabilitySeven(frame7)
 capability_eight = capability_eight.CapabilityEight(frame8)
-
 
 # ============================================================================================
 # SET CAPABILITY FRAMES AND ADDS THEM INTO TAB SYSTEM
