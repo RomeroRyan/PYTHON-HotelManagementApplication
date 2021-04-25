@@ -1,5 +1,7 @@
 # CAPABILITY 1: CODE BLOCK
 
+import datetime
+
 from rooms_manager import update_room, get_hotel_rooms
 
 try:
@@ -33,7 +35,7 @@ class CapabilityOne:
         # CAPABILITY 1: initialize buttons for every room in the hotel
         for index, room in enumerate(self.room_list):
             room_button = tk.Button(self.frame, text=room.get_room_combo_name(), font=("Times", 20), padx=25, command=lambda index=index: self.change_room_status(index))
-            room_button.config(bg=self.room_list[index].get_room_color())
+            room_button.config(bg=self.room_list[index].get_room_color(datetime.datetime.today().weekday()),)
             room_button.grid(row=2 + int(index/4), column=index%4, padx=15, pady=15)
             self.room_buttons.append(room_button)
 

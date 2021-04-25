@@ -1,5 +1,6 @@
 import json
 import os.path
+import datetime
 
 from hotel_room import HotelRoom
 
@@ -23,5 +24,5 @@ def get_hotel_rooms():
     rooms = get_raw_rooms()
 
     for room in rooms:
-        room_list.append(HotelRoom(room["room_num"], room["room_type"], room["room_status"]))
+        room_list.append(HotelRoom(room["room_num"], room["room_type"], room_week=room["days"]))
     return room_list

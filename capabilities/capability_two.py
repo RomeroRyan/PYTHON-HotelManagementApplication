@@ -1,5 +1,7 @@
 from random import *
 
+from rooms_manager import get_hotel_rooms
+
 try:
     import Tkinter as tk
 except ImportError:
@@ -10,44 +12,32 @@ except ImportError:
 
 class CapabilityTwo:
     def __init__(self, frame):
-        weekly_reservation_title = tk.Label(frame, text="Weekly Room Reservations", font=("Times", 20, "bold"))
-        weekly_reservation_title.grid(row = 1, column = 3, padx=15, pady=15)
+        self.frame = frame
+        self.title_container = tk.LabelFrame(frame)
+        self.days_rooms_container = tk.LabelFrame(frame)
+        self.weekly_reservation_title = tk.Label(self.title_container, text="Weekly Room Reservations", font=("Times", 20, "bold"))
+        self.weekly_reservation_title.grid(row = 1, column = 3, padx=15, pady=15)
+        self.rooms = get_hotel_rooms()
+        self.day_labels = []
+        self.room_buttons = []
+        self.title_container.pack()
 
-        colors = {
-            0: "orange",
-            1: "white"
-        }
-
-        day_labels = []
         days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
         for day in days:
-            day_labels.append(tk.Label(frame, text=day, font=("Times", 20, "bold")))
+            self.day_labels.append(tk.Label(self.days_rooms_container, text=day, font=("Times", 15, "bold")))
 
-        for index, day in enumerate(day_labels):
-            day.grid(row = 2, column = index % 7, padx=15, pady=15)
+        for index, day in enumerate(self.day_labels):
+            day.grid(row = 2, column = index % 7, padx=15, pady=5)
 
-        room_buttons = []
-        for i in range(0, 56):
-            room_buttons.append(tk.Button(frame, text="Room " + str(i+1), font=("Times", 20, "bold"), bg= colors[randint(0, 1)]))
+        for i in range(len(self.rooms)):
+            for j in range(0, 7):
+                color = self.rooms[i].get_room_color(j)
+                print(j)
+                room_button = tk.Button(self.days_rooms_container, text=self.rooms[i].get_room_combo_name(), font=("Times", 15, "bold"), bg=color)
+                self.room_buttons.append(room_button)
+                print(room_button.cget('bg'))
+                room_button.grid(row = 3 + i, column = j % 7, padx=15, pady=5)
 
-        row = 0
-        front = 1
-        back = 0
-
-        sizes = {
-            0: "K",
-            1: "DQ",
-            2: "DQk",
-            3: "S"
-        }
-
-        for index, room in enumerate(room_buttons):
-            if index%7 == 0:
-                row += 1
-                back += 1
-            if back % 5 == 0:
-                back = 1
-                front += 1
-            room['text'] = "Room " + str(front) + "0" + str(back) + "(" + sizes[back-1] + ")"
-            room.grid(row = row + 3, column = index % 7, padx=15, pady=15)
+        
+        self.days_rooms_container.pack()

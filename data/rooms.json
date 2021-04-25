@@ -2,161 +2,209 @@
     {
         "room_num": "101",
         "room_type": "King",
-        "room_status": "Available"
+        "days": {
+            "0": "Dirty",
+            "1": "Available",
+            "2": "Available",
+            "3": "Maintenance",
+            "4": "Available",
+            "5": "Available",
+            "6": "Dirty"
+        }
     },
     {
         "room_num": "102",
         "room_type": "Queen",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "103",
         "room_type": "Queen Kitchen",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "104",
         "room_type": "Suite",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "201",
         "room_type": "King",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "202",
         "room_type": "Queen",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "203",
         "room_type": "Queen Kitchen",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "204",
         "room_type": "Suite",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "301",
         "room_type": "King",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "302",
         "room_type": "Queen",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "303",
         "room_type": "Queen Kitchen",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "304",
         "room_type": "Suite",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "401",
         "room_type": "King",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "402",
         "room_type": "Queen",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "403",
         "room_type": "Queen Kitchen",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     },
     {
         "room_num": "404",
         "room_type": "Suite",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "101",
-        "room_type": "King",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "102",
-        "room_type": "Queen",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "103",
-        "room_type": "Queen Kitchen",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "104",
-        "room_type": "Suite",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "201",
-        "room_type": "King",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "202",
-        "room_type": "Queen",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "203",
-        "room_type": "Queen Kitchen",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "204",
-        "room_type": "Suite",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "301",
-        "room_type": "King",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "302",
-        "room_type": "Queen",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "303",
-        "room_type": "Queen Kitchen",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "304",
-        "room_type": "Suite",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "401",
-        "room_type": "King",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "402",
-        "room_type": "Queen",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "403",
-        "room_type": "Queen Kitchen",
-        "room_status": "Available"
-    },
-    {
-        "room_num": "404",
-        "room_type": "Suite",
-        "room_status": "Available"
+        "days": {
+            "0": "Available",
+            "1": "Available",
+            "2": "Available",
+            "3": "Available",
+            "4": "Available",
+            "5": "Available",
+            "6": "Available"
+        }
     }
 ]
