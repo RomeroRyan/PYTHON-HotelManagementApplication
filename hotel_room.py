@@ -29,3 +29,11 @@ class HotelRoom:
         for word in self.room_type.split(" "):
             room_initials += word[0]
         return "{0} ({1})".format(self.room_num, room_initials)
+
+    def get_room_color(self):
+        if self.room_status == "Occupied":
+            return "#FF8F51"
+        elif self.room_status == "Dirty":
+            return "#F8FC3F"
+        elif self.room_status == "Maintenance":
+            return "#FD5E5E"
