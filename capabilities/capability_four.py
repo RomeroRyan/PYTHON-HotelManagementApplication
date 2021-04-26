@@ -1,4 +1,7 @@
 # CAPABILITY 4: CODE BLOCK
+
+from rooms_manager import get_hotel_rooms
+
 try:
     import Tkinter as tk
     import ttk
@@ -11,112 +14,75 @@ except ImportError:
 
 
 class CapabilityFour:
-    def __init__(self, frame4):
+    def __init__(self, frame):
+        self.frame = frame
+        self.room_list = get_hotel_rooms()
+        self.sizeofList = len(self.room_list)       # numerical value of room list
+        self.roomFrames = []                        # holds list of newly created frames in this capability
+        room_frame_index = 0
+        room_widget_index = 0
 
-        # CAPABILITY 4: create title widgets
-        capa4Title = tk.Label(frame4, text="Room Status", font=("Times", 20, "bold"))
+        # CAPABILITY 4: create and set title label
+        title = tk.Label(self.frame, text="Room Status", font=("Times", 30, "bold"))
+        title.grid(row=0, column=0, sticky="W", padx=120)
 
-        # CAPABILITY 4: create individual room frames
-        capa4Room02 = tk.LabelFrame(frame4, padx=5, pady=5, bg='#C4C4C4')
-        capa4Room04 = tk.LabelFrame(frame4, padx=5, pady=5, bg='#C4C4C4')
-        capa4Room12 = tk.LabelFrame(frame4, padx=5, pady=5, bg='#C4C4C4')
-        capa4Room14 = tk.LabelFrame(frame4, padx=5, pady=5, bg='#C4C4C4')
+        # ----------------------------------------------------------------------------
+        # CAPABILITY 4: create frames for each individual room (add it to list roomFrames)
+        while room_frame_index < self.sizeofList:
+            room = tk.LabelFrame(self.frame, padx=5, pady=5, bg='#C4C4C4')
 
-        # CAPABILITY 4: create label widgets for each individual room frame
+            # displays rooms with status "dirty" and "occupied" ONLY!
+            if (self.room_list[room_frame_index].get_room_status() == "Dirty") or (
+                    self.room_list[room_frame_index].get_room_status() == "Occupied"):
+                # +1 to take account of titleLabel being row=0
+                room.grid(row=room_frame_index + 1, column=0, sticky="W", padx=50)
 
-        # create room 2 labels
-        room02Number = tk.Label(capa4Room02, text="102 (DQ)", font=("Times", 14, "bold"), bg='#C4C4C4')
-        room02Housekeeper = tk.Label(capa4Room02, text="HouseKeeper: John D.", bg='#C4C4C4')
-        room02Status = tk.Label(capa4Room02, text="Status: Dirty", bg='#C4C4C4')
-        room02Bathroom = tk.Label(capa4Room02, text="Bathroom: To Do", bg='#C4C4C4')
-        room02Towels = tk.Label(capa4Room02, text="Towels: Done", bg='#C4C4C4')
-        room02Vacuum = tk.Label(capa4Room02, text="Vacuum: To Do", bg='#C4C4C4')
-        room02Dusting = tk.Label(capa4Room02, text="Dusting: Done", bg='#C4C4C4')
-        room02Bed = tk.Label(capa4Room02, text="Beds: To Do", bg='#C4C4C4')
-        room02Electronics = tk.Label(capa4Room02, text="Electronics: To Do", bg='#C4C4C4')
+            # append all room frames into list (both displayed and not displayed)
+            self.roomFrames.append(room)
+            # index increment
+            room_frame_index = room_frame_index + 1
 
-        # create room 4 labels
-        room04Number = tk.Label(capa4Room04, text="104 (S)", font=("Times", 14, "bold"), bg='#C4C4C4')
-        room04Housekeeper = tk.Label(capa4Room04, text="HouseKeeper: Anna M.", bg='#C4C4C4')
-        room04Status = tk.Label(capa4Room04, text="Status: Dirty", bg='#C4C4C4')
-        room04Bathroom = tk.Label(capa4Room04, text="Bathroom: Done", bg='#C4C4C4')
-        room04Towels = tk.Label(capa4Room04, text="Towels: Done", bg='#C4C4C4')
-        room04Vacuum = tk.Label(capa4Room04, text="Vacuum: To Do", bg='#C4C4C4')
-        room04Dusting = tk.Label(capa4Room04, text="Dusting: Done", bg='#C4C4C4')
-        room04Bed = tk.Label(capa4Room04, text="Beds: To Do", bg='#C4C4C4')
-        room04Electronics = tk.Label(capa4Room04, text="Electronics: To Do", bg='#C4C4C4')
+        # ----------------------------------------------------------------------------
+        # CAPABILITY 4: create & sets all widgets for each room frame
+        while room_widget_index < self.sizeofList:
+            room_num = tk.Label(self.roomFrames[room_widget_index],
+                                text=self.room_list[room_widget_index].get_room_combo_name(),
+                                font=("Times", 14, "bold"), bg='#C4C4C4')
+            room_status = tk.Label(self.roomFrames[room_widget_index], bg='#C4C4C4',
+                                   text="Status: " + self.room_list[0].get_room_status())
 
-        # create room 12 labels
-        room12Number = tk.Label(capa4Room12, text="304 (S)", font=("Times", 14, "bold"), bg='#C4C4C4')
-        room12Housekeeper = tk.Label(capa4Room12, text="HouseKeeper: John D.", bg='#C4C4C4')
-        room12Status = tk.Label(capa4Room12, text="Status: Dirty", bg='#C4C4C4')
-        room12Bathroom = tk.Label(capa4Room12, text="Bathroom: To Do", bg='#C4C4C4')
-        room12Towels = tk.Label(capa4Room12, text="Towels: Done", bg='#C4C4C4')
-        room12Vacuum = tk.Label(capa4Room12, text="Vacuum: To Do", bg='#C4C4C4')
-        room12Dusting = tk.Label(capa4Room12, text="Dusting: Done", bg='#C4C4C4')
-        room12Bed = tk.Label(capa4Room12, text="Beds: To Do", bg='#C4C4C4')
-        room12Electronics = tk.Label(capa4Room12, text="Electronics: To Do", bg='#C4C4C4')
+            # create the variable holder for each of the checkboxes
+            bathroom_check = tk.IntVar()
+            towels_check = tk.IntVar()
+            vacuum_check = tk.IntVar()
+            dust_check = tk.IntVar()
+            bed_check = tk.IntVar()
+            electronic_check = tk.IntVar()
 
-        # create room 14 labels
-        room14Number = tk.Label(capa4Room14, text="402 (DQ)", font=("Times", 14, "bold"), bg='#C4C4C4')
-        room14Housekeeper = tk.Label(capa4Room14, text="HouseKeeper: Sam P.", bg='#C4C4C4')
-        room14Status = tk.Label(capa4Room14, text="Status: Dirty", bg='#C4C4C4')
-        room14Bathroom = tk.Label(capa4Room14, text="Bathroom: To Do", bg='#C4C4C4')
-        room14Towels = tk.Label(capa4Room14, text="Towels: To Do", bg='#C4C4C4')
-        room14Vacuum = tk.Label(capa4Room14, text="Vacuum: TO Do", bg='#C4C4C4')
-        room14Dusting = tk.Label(capa4Room14, text="Dusting: Done", bg='#C4C4C4')
-        room14Bed = tk.Label(capa4Room14, text="Beds: Done", bg='#C4C4C4')
-        room14Electronics = tk.Label(capa4Room14, text="Electronics: Done", bg='#C4C4C4')
+            # create checkboxes
+            bathroom = tk.Checkbutton(self.roomFrames[room_widget_index], text="Bathroom",
+                                      variable=bathroom_check, bg='#C4C4C4')
+            towels = tk.Checkbutton(self.roomFrames[room_widget_index], text="Towels",
+                                    variable=towels_check, bg='#C4C4C4')
+            vacuum = tk.Checkbutton(self.roomFrames[room_widget_index], text="Vacuum",
+                                    variable=vacuum_check, bg='#C4C4C4')
+            dust = tk.Checkbutton(self.roomFrames[room_widget_index], text="Dusting",
+                                  variable=dust_check, bg='#C4C4C4')
+            bed = tk.Checkbutton(self.roomFrames[room_widget_index], text="Bed",
+                                 variable=bed_check, bg='#C4C4C4')
+            electronic = tk.Checkbutton(self.roomFrames[room_widget_index], text="Electronic",
+                                        variable=electronic_check, bg='#C4C4C4')
 
-        # CAPABILITY 4: set widgets into individual room frames
+            # set all widgets (labels and checkboxes) within the room's frame
+            room_num.grid(row=0, column=0, columnspan=2, pady=10, sticky="W")
+            room_status.grid(row=1, column=0, columnspan=2, padx=5, pady=5, sticky="W")
+            bathroom.grid(row=0, column=2, padx=5, pady=5, sticky="W")
+            towels.grid(row=1, column=2, padx=5, pady=5, sticky="W")
+            vacuum.grid(row=0, column=3, padx=5, pady=5, sticky="W")
+            dust.grid(row=1, column=3, padx=5, pady=5, sticky="W")
+            bed.grid(row=0, column=4, padx=5, pady=5, sticky="W")
+            electronic.grid(row=1, column=4, padx=5, pady=5, sticky="W")
+            # index increment
+            room_widget_index = room_widget_index + 1
+        # ------------------------------------------------------------------------------------------------------
 
-        # set room 2 widgets
-        room02Number.grid(row=0, column=0, rowspan=2, pady=10, sticky="E")
-        room02Status.grid(row=0, column=1, padx=5, pady=5, sticky="E")
-        room02Housekeeper.grid(row=1, column=1, padx=5, pady=5, sticky="E")
-        room02Bathroom.grid(row=0, column=2, padx=5, pady=5, sticky="E")
-        room02Towels.grid(row=1, column=2, padx=5, pady=5, sticky="E")
-        room02Vacuum.grid(row=0, column=3, padx=5, pady=5, sticky="E")
-        room02Dusting.grid(row=1, column=3, padx=5, pady=5, sticky="E")
-        room02Bed.grid(row=0, column=4, padx=5, pady=5, sticky="E")
-        room02Electronics.grid(row=1, column=4, padx=5, pady=5, sticky="E")
-
-        # set room 4 widgets
-        room04Number.grid(row=0, column=0, rowspan=2, pady=10, sticky="E")
-        room04Status.grid(row=0, column=1, padx=5, pady=5, sticky="E")
-        room04Housekeeper.grid(row=1, column=1, padx=5, pady=5, sticky="E")
-        room04Bathroom.grid(row=0, column=2, padx=5, pady=5, sticky="E")
-        room04Towels.grid(row=1, column=2, padx=5, pady=5, sticky="E")
-        room04Vacuum.grid(row=0, column=3, padx=5, pady=5, sticky="E")
-        room04Dusting.grid(row=1, column=3, padx=5, pady=5, sticky="E")
-        room04Bed.grid(row=0, column=4, padx=5, pady=5, sticky="E")
-        room04Electronics.grid(row=1, column=4, padx=5, pady=5, sticky="E")
-
-        # set room 12 widgets
-        room12Number.grid(row=0, column=0, rowspan=2, pady=10, sticky="E")
-        room12Status.grid(row=0, column=1, padx=5, pady=5, sticky="E")
-        room12Housekeeper.grid(row=1, column=1, padx=5, pady=5, sticky="E")
-        room12Bathroom.grid(row=0, column=2, padx=5, pady=5, sticky="E")
-        room12Towels.grid(row=1, column=2, padx=5, pady=5, sticky="E")
-        room12Vacuum.grid(row=0, column=3, padx=5, pady=5, sticky="E")
-        room12Dusting.grid(row=1, column=3, padx=5, pady=5, sticky="E")
-        room12Bed.grid(row=0, column=4, padx=5, pady=5, sticky="E")
-        room12Electronics.grid(row=1, column=4, padx=5, pady=5, sticky="E")
-
-        # set room 14 widgets
-        room14Number.grid(row=0, column=0, rowspan=2, pady=10, sticky="E")
-        room14Status.grid(row=0, column=1, padx=5, pady=5, sticky="E")
-        room14Housekeeper.grid(row=1, column=1, padx=5, pady=5, sticky="E")
-        room14Bathroom.grid(row=0, column=2, padx=5, pady=5, sticky="E")
-        room14Towels.grid(row=1, column=2, padx=5, pady=5, sticky="E")
-        room14Vacuum.grid(row=0, column=3, padx=5, pady=5, sticky="E")
-        room14Dusting.grid(row=1, column=3, padx=5, pady=5, sticky="E")
-        room14Bed.grid(row=0, column=4, padx=5, pady=5, sticky="E")
-        room14Electronics.grid(row=1, column=4, padx=5, pady=5, sticky="E")
-
-        # CAPABILITY 4: set frames into Main Frame
-        capa4Title.grid(row=0, column=0, sticky="W")
-        capa4Room02.grid(row=1, column=0, sticky="W")
-        capa4Room04.grid(row=2, column=0, sticky="W")
-        capa4Room12.grid(row=3, column=0, sticky="W")
-        capa4Room14.grid(row=4, column=0, sticky="W")
