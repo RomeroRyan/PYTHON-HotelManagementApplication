@@ -113,4 +113,6 @@ class CapabilityFive:
         changed_fields = [self.fname_field.get(), self.lname_field.get(), self.phone_field.get(), self.address_field.get(),
                           self.email_field.get(), self.id_field.get(), self.vehicle_field.get(), self.filename]
         print("changes saved...")
+        save_label = tk.Label(
+            self.frame, text="Changes saved to database.").grid(row=11, column=0, padx=15, pady=5)
         update_guest(self.index, changed_fields)
