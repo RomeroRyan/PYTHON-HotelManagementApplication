@@ -1,6 +1,5 @@
 import tkinter as tk
 import os
-import shutil
 import random
 import string
 from tkinter import filedialog
@@ -11,13 +10,13 @@ from guest_manager import *
 
 
 class CapabilityFive:
-    def __init__(self, frame, index):
+    def __init__(self, frame, guest_id):
         self.frame = frame
-        # item in guest
-        # self.guest[0].get_fname()
-        self.guest = get_guests()
-        self.index = index
-        self.filename = self.guest[index].get_img_path()
+        self.guests = get_guests()
+        self.current_guestid = guest_id
+        self.current_guest = find_guest(guest_id)
+        self.filename = self.current_guest.get_img_path()
+
         profile_title = tk.Label(
             self.frame, text="Guest Profile", font=("Times", 20, "bold"))
         profile_title.grid(row=0, column=0)
@@ -63,7 +62,7 @@ class CapabilityFive:
         # choose file from computer and save it to the projects res folder.
         self.filename = filedialog.askopenfilename(title='open')
         if self.filename == "":
-            self.filename = self.guest[self.index].get_img_path()
+            self.filename = self.current_guest.get_img_path()
         return self.filename
 
     def save_img(self):
@@ -95,14 +94,14 @@ class CapabilityFive:
 
     # EXAMPLE: pass in self.guest[0]
     def populate_fields(self):
-        self.fname_field.insert(0, self.guest[self.index].get_fname())
-        self.lname_field.insert(0, self.guest[self.index].get_lname())
-        self.phone_field.insert(0, self.guest[self.index].get_phone())
-        self.address_field.insert(0, self.guest[self.index].get_address())
-        self.email_field.insert(0, self.guest[self.index].get_email())
-        self.id_field.insert(0, self.guest[self.index].get_id())
-        self.vehicle_field.insert(0, self.guest[self.index].get_vehicle())
-        self.populate_img(self.guest[self.index].get_img_path())
+        self.fname_field.insert(0, self.current_guest.get_fname())
+        self.lname_field.insert(0, self.current_guest.get_lname())
+        self.phone_field.insert(0, self.current_guest.get_phone())
+        self.address_field.insert(0, self.current_guest.get_address())
+        self.email_field.insert(0, self.current_guest.get_email())
+        self.id_field.insert(0, self.current_guest.get_id())
+        self.vehicle_field.insert(0, self.current_guest.get_vehicle())
+        self.populate_img(self.current_guest.get_img_path())
 
     def save_changes(self):
         fn = os.path.basename(self.filename)
@@ -112,7 +111,9 @@ class CapabilityFive:
             self.filename = self.save_img()
         changed_fields = [self.fname_field.get(), self.lname_field.get(), self.phone_field.get(), self.address_field.get(),
                           self.email_field.get(), self.id_field.get(), self.vehicle_field.get(), self.filename]
-        print("changes saved...")
         save_label = tk.Label(
             self.frame, text="Changes saved to database.").grid(row=11, column=0, padx=15, pady=5)
-        update_guest(self.index, changed_fields)
+        update_guest(self.current_guestid, changed_fields)
+
+        if self.current_guestid != self.id_field.get():
+            self.current_guestid = self.id_field.get()
