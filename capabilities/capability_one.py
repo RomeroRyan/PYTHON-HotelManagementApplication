@@ -50,7 +50,7 @@ class CapabilityOne:
         if self.room_list[n].get_room_status() == "Available":
             self.tabs.select(self.guest_page)
         elif self.room_list[n].get_room_status() == "Occupied":
-            tabs.select(self.guest_page)
+            self.tabs.select(self.guest_page)
         elif self.room_list[n].get_room_status() == "Dirty":
             self.switch_to_available(n)
         elif self.room_list[n].get_room_status() == "Maintenance":
