@@ -10,7 +10,8 @@
             "4": "Available",
             "5": "Available",
             "6": "Dirty"
-        }
+        },
+        "room_status": "Available"
     },
     {
         "room_num": "102",

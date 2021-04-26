@@ -1,3 +1,5 @@
+import datetime
+
 class HotelRoom:
     """ Hotel Room Class """
 
@@ -17,6 +19,13 @@ class HotelRoom:
 
     def set_room_type(self, room_type):
         self.room_type = room_type
+
+    def get_room_status(self):
+        return self.room_week[str(datetime.datetime.today().weekday())]
+
+    def set_room_status(self, status):
+        self.room_week[str(datetime.datetime.today().weekday())] = status
+
 
     def get_room_combo_name(self):
         room_initials = ""

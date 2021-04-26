@@ -33,10 +33,8 @@ class CapabilityTwo:
         for i in range(len(self.rooms)):
             for j in range(0, 7):
                 color = self.rooms[i].get_room_color(j)
-                print(j)
                 room_button = tk.Button(self.days_rooms_container, text=self.rooms[i].get_room_combo_name(), font=("Times", 15, "bold"), bg=color)
                 self.room_buttons.append(room_button)
-                print(room_button.cget('bg'))
                 room_button.grid(row = 3 + i, column = j % 7, padx=15, pady=5)
 
         
