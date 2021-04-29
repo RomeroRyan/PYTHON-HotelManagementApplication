@@ -7,7 +7,7 @@
         "email": "jdoe@gmail.com",
         "id": "Y1234982",
         "vehicle": "BIG CAR",
-        "img_path": "./res/placeholder.png",
+        "img_path": "./res/cute-cat.jpeg",
         "rm_number": "101",
         "chk_in": "02/28/2021",
         "chk_out": "03/01/2021"
