@@ -2,16 +2,16 @@ class Guest:
     """ Guest Class """
 
     def __init__(
-            self, fname="John", lname="Smith",
-            phone="555-555-5555",
-            address="5555 Street Ave",
-            email="myEmail@gmail.com",
-            id="A100000",
-            vehicle="L102AO2",
-            img_path="./res/placeholder.png",
-            rm_number="101",
-            chk_in="02/28/2021",
-            chk_out="03/01/2021"
+            self, fname="NULL", lname="NULL",
+            phone="NULL",
+            address="NULL",
+            email="NULL",
+            id="NULL",
+            vehicle="NULL",
+            img_path="NULL",
+            rm_number="NULL",
+            chk_in="NULL",
+            chk_out="NULL"
     ):
         self.fname = fname
         self.lname = lname
