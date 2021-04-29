@@ -75,10 +75,6 @@ def find_guest(guest_id):
             return guest
 
 
-# WORKS: Guest First Name, Guest Last Name,  Phone Number, Street Address, Check In Date, Checkout Date.
-# DOESNT WORK: Room Number bc it thinks rm_number = chk_in
-
-
 def search_guests(flg, key):
     results = []
     guests = get_guests_search()

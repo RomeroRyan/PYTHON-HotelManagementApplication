@@ -1,6 +1,6 @@
 [
     {
-        "fname": "JON",
+        "fname": "JOHN",
         "lname": "DOE",
         "phone": "323-323-3231",
         "address": "3232 FIRST STREET",
@@ -50,5 +50,18 @@
         "rm_number": "303",
         "chk_in": "04/10/2021",
         "chk_out": "04/20/2021"
+    },
+    {
+        "fname": "PETER",
+        "lname": "PARKER",
+        "phone": "323-102-0093",
+        "address": "20 INGRAM STREET",
+        "email": "PPARKER@GMAIL.COM",
+        "id": "T9903483",
+        "vehicle": "Q22KP95",
+        "img_path": "./res/placeholder.png",
+        "rm_number": "507",
+        "chk_in": "04/20/2021",
+        "chk_out": "04/25/2021"
     }
 ]

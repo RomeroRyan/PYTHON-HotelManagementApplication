@@ -1,8 +1,8 @@
+import datetime
+import tkinter as tk
 from capabilities.capability_five import CapabilityFive
 from guest_manager import search_guests
-import tkinter as tk
 from tkinter import *
-import tkinter
 
 
 class CapabilitySeven:
@@ -44,13 +44,41 @@ class CapabilitySeven:
             self.search_flag = "Contains"
 
     def display_results(self, guest_list):
+
         for offset, guest in enumerate(guest_list):
             msg = "Name: " + guest.get_fname() + " " + guest.get_lname() + " Check in: " + \
                 guest.get_chk_in() + " Check out: " + guest.get_chk_out()
             guest_btn = tk.Button(self.frame, text=msg, command=lambda t=guest.get_id(): CapabilityFive(tk.Toplevel(self.frame), t),
                                   width=75, pady=10).grid(row=8+offset, column=0)
 
+    def popup_msg(self, msg):
+        popup = tk.Tk()
+        popup.wm_title("Error: Unable to save changes")
+        label = tk.Label(popup, text=msg)
+        label.pack(side="top", fill="x", padx=20, pady=10)
+        B1 = tk.Button(popup, text="Okay", command=popup.destroy)
+        B1.pack()
+        popup.mainloop()
+
+    def clear_frame(self):
+        # destroy all widgets from frame
+        for widget in self.frame.winfo_children():
+            widget.destroy()
+        # this will clear frame and frame will be empty
+        # if you want to hide the empty panel then
+        self.frame.pack_forget()
+
     def search(self):
         key = str(self.search_entry.get())
         guests_found = search_guests(self.search_flag, key)
-        self.display_results(guests_found)
+        if len(guests_found) > 0:
+            self.clear_frame()
+            CapabilitySeven(self.frame)
+            self.display_results(guests_found)
+        else:
+            self.clear_frame()
+            CapabilitySeven(self.frame)
+            # error_msg = "Phone number must be in the format: ###-###-####\nand Email must be in the format: example@email.com"
+            # self.popup_msg(error_msg)
+            message_label = tk.Label(
+                self.frame, text="No results found").grid(row=8, column=0, padx=15, pady=5)
