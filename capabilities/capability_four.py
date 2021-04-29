@@ -17,33 +17,33 @@ class CapabilityFour:
     def __init__(self, frame):
         self.frame = frame
         self.room_list = get_hotel_rooms()
-        self.roomFrames = []                        # holds list of newly created frames in this capability
-
+        self.room_frames = []                        # holds list of newly created frames in this capability
+        
         # CAPABILITY 4: create and set title label
         title = tk.Label(self.frame, text="Room Status", font=("Times", 30, "bold"))
         title.grid(row=0, column=0, sticky="W", padx=120)
 
         # ----------------------------------------------------------------------------
-        # CAPABILITY 4: create frames for each individual room (add it to list roomFrames)
-        for index, roomObj in enumerate(self.room_list):
-            roomFr = tk.LabelFrame(self.frame, padx=5, pady=5, bg='#C4C4C4')
+        # CAPABILITY 4: create frames for each individual room (add it to list room_frames)
+        for index, room_obj in enumerate(self.room_list):
+            room_frame_label = tk.LabelFrame(self.frame, padx=5, pady=5, bg='#C4C4C4')
 
             # displays rooms with status "dirty" and "occupied" ONLY!
-            if (roomObj.get_room_status() == "Dirty") or (roomObj.get_room_status() == "Occupied"):
+            if (room_obj.get_room_status() == "Dirty") or (room_obj.get_room_status() == "Occupied"):
                 # +1 to take account of titleLabel being row=0
-                roomFr.grid(row=index + 1, column=0, sticky="W", padx=50)
+                room_frame_label.grid(row=index + 1, column=0, sticky="W", padx=50)
 
             # append all room frames into list (both displayed and not displayed)
-            self.roomFrames.append(roomFr)
+            self.room_frames.append(room_frame_label)
 
         # ----------------------------------------------------------------------------
         # CAPABILITY 4: create & sets all widgets for each room frame
-        for index2, roomObj in enumerate(self.room_list):
-            room_num = tk.Label(self.roomFrames[index2],
-                                text=roomObj.get_room_combo_name(),
+        for index, room_obj in enumerate(self.room_list):
+            room_num = tk.Label(self.room_frames[index],
+                                text=room_obj.get_room_combo_name(),
                                 font=("Times", 14, "bold"), bg='#C4C4C4')
-            room_status = tk.Label(self.roomFrames[index2], bg='#C4C4C4',
-                                   text="Status: " + roomObj.get_room_status())
+            room_status = tk.Label(self.room_frames[index], bg='#C4C4C4',
+                                   text="Status: " + room_obj.get_room_status())
 
             # create the variable holder for each of the checkboxes
             bathroom_check = tk.IntVar()
@@ -54,17 +54,17 @@ class CapabilityFour:
             electronic_check = tk.IntVar()
 
             # create checkboxes
-            bathroom = tk.Checkbutton(self.roomFrames[index2], text="Bathroom",
+            bathroom = tk.Checkbutton(self.room_frames[index], text="Bathroom",
                                       variable=bathroom_check, bg='#C4C4C4')
-            towels = tk.Checkbutton(self.roomFrames[index2], text="Towels",
+            towels = tk.Checkbutton(self.room_frames[index], text="Towels",
                                     variable=towels_check, bg='#C4C4C4')
-            vacuum = tk.Checkbutton(self.roomFrames[index2], text="Vacuum",
+            vacuum = tk.Checkbutton(self.room_frames[index], text="Vacuum",
                                     variable=vacuum_check, bg='#C4C4C4')
-            dust = tk.Checkbutton(self.roomFrames[index2], text="Dusting",
+            dust = tk.Checkbutton(self.room_frames[index], text="Dusting",
                                   variable=dust_check, bg='#C4C4C4')
-            bed = tk.Checkbutton(self.roomFrames[index2], text="Bed",
+            bed = tk.Checkbutton(self.room_frames[index], text="Bed",
                                  variable=bed_check, bg='#C4C4C4')
-            electronic = tk.Checkbutton(self.roomFrames[index2], text="Electronic",
+            electronic = tk.Checkbutton(self.room_frames[index], text="Electronic",
                                         variable=electronic_check, bg='#C4C4C4')
 
             # set all widgets (labels and checkboxes) within the room's frame
