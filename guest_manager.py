@@ -6,7 +6,7 @@ from guest import Guest
 # pass an index to update and an array of the field values
 
 
-def update_guest(index, fields):
+def update_guest(id, fields):
     f = open(os.path.dirname(__file__) + '/data/guest.json', 'r+')
     guests = json.load(f)
     f.seek(0)
