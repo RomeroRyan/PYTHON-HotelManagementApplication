@@ -1,6 +1,8 @@
 # Hotel Assignment Project
 #
 import json
+from guest import Guest
+from guest_manager import *
 try:
     import Tkinter as tk
     import ttk
@@ -10,6 +12,7 @@ except ImportError:
         import tkinter.ttk as ttk
     except ImportError:
         print("Could not import tkinter!")
+
 
 def main():
     from capabilities.capability_one import CapabilityOne
@@ -64,9 +67,9 @@ def main():
     frame7 = tk.Frame(my_tabs)  # capability 7
     frame8 = tk.Frame(my_tabs)  # capability 8
 
-
     # ============================================================================================
     # WELCOME: CODE BLOCK
+
     def go_menu():
         welcome_frame.forget()
         main_frame.pack()
@@ -94,11 +97,12 @@ def main():
     # ============================================================================================
 
     # CALL CODE INITIALIZER HERE
-    capability_one = CapabilityOne(frame1 , my_tabs, frame6)
+    guests = get_guests()
+    capability_one = CapabilityOne(frame1, my_tabs, frame6)
     capability_two = CapabilityTwo(frame2)
     capability_three = CapabilityThree(frame3)
     capability_four = CapabilityFour(frame4)
-    capability_five = CapabilityFive(frame5)
+    capability_five = CapabilityFive(frame5, guests[0].get_id())
     capability_six = CapabilitySix(frame6)
     capability_seven = CapabilitySeven(frame7)
     capability_eight = CapabilityEight(frame8)
