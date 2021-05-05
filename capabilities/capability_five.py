@@ -18,6 +18,9 @@ class CapabilityFive:
         self.current_guestid = guest_id
         self.filename = self.current_guest.get_img_path()
 
+        self.RESOURCE_FOLDER = './res/'
+        self.DEFAULT_IMAGE = 'placeholder.png'
+
         profile_title = tk.Label(
             self.frame, text="Guest Profile", font=("Times", 20, "bold"))
         profile_title.grid(row=0, column=0)
@@ -69,11 +72,20 @@ class CapabilityFive:
     def save_img(self):
         # if file not in folder save the file to the res folder
         fn = os.path.basename(self.filename)
-        file_path = os.path.join(r"./res/", fn)
+        file_path = os.path.join(self.RESOURCE_FOLDER, fn)
         self.img = Image.open(self.filename)
         self.img = self.img.resize((250, 250), Image.ANTIALIAS)
-        self.img.save(file_path, 'JPEG')
-        saved_fn = "./res/" + fn
+        try:
+            self.img.save(file_path, 'JPEG')
+        except OSError:
+            try:
+                self.img = self.img.convert('RGB')
+                self.img.save(file_path, 'JPEG')
+            except OSError:
+                print("Could not convert image to JPEG or RGB to JPEG")
+                exit(-1)
+
+        saved_fn = self.RESOURCE_FOLDER + fn
         return saved_fn
 
     def replace_img(self):
@@ -86,7 +98,10 @@ class CapabilityFive:
         self.panel.image = self.new_img
 
     def populate_img(self, path):
-        self.img = Image.open(path)
+        try:
+            self.img = Image.open(path)
+        except FileNotFoundError:
+            self.img = Image.open(self.RESOURCE_FOLDER + self.DEFAULT_IMAGE)
         self.img = self.img.resize((250, 250), Image.ANTIALIAS)
         self.img = ImageTk.PhotoImage(self.img)
         self.panel = Label(self.frame, image=self.img)
@@ -133,16 +148,17 @@ class CapabilityFive:
 
     def save_changes(self):
         fn = os.path.basename(self.filename)
-        file_path = os.path.join(r"./res/", fn)
+        file_path = os.path.join(self.RESOURCE_FOLDER, fn)
         phone_number = self.phone_field.get()
         email = self.email_field.get()
-        if not os.path.exists(file_path):
-            self.filename = self.save_img()
-
         if not self.valid_number(phone_number) or not self.valid_email(email):
             error_msg = "Phone number must be in the format: ###-###-####\nand Email must be in the format: example@email.com"
             self.popup_msg(error_msg)
         else:
+            if not os.path.exists(file_path):
+                self.filename = self.save_img()
+            else:
+                self.filename = file_path
             changed_fields = [self.fname_field.get(), self.lname_field.get(), self.phone_field.get(), self.address_field.get(),
                               self.email_field.get(), self.id_field.get(), self.vehicle_field.get(), self.filename]
             message_label = tk.Label(
