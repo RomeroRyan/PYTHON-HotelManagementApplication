@@ -167,6 +167,3 @@ class CapabilityFive:
 
             if self.current_guestid != self.id_field.get():
                 self.current_guestid = self.id_field.get()
-
-
-
