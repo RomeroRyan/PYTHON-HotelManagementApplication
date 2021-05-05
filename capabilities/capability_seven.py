@@ -12,7 +12,7 @@ class CapabilitySeven:
         search_title = tk.Label(
             self.frame, text="Guest Search", font=("Times", 20, "bold"))
         search_title.grid(row=0, column=0)
-        desc = tk.Label(self.frame, text="Search for guests using any of the following fields:\nGuest First Name, Guest Last Name, Room Number, Phone Number, Street Address, Check In Date, Checkout Date.\nDates must be formatted as MM/DD/YYY and Phone numbers must be formatted as ###-###-####.",
+        desc = tk.Label(self.frame, text="Search for guests using any of the following fields:\nGuest First Name, Guest Last Name, Room Number, Phone Number, Street Address, Check In Date, Checkout Date.\n\nDates must be formatted as MM/DD/YYY and Phone numbers must be formatted as ###-###-####.",
                         wraplength=500, justify=LEFT, anchor="w")
         desc.grid(row=1, column=0, columnspan=2, sticky=W, padx=15)
 
