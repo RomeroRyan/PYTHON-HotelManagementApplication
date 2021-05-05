@@ -79,7 +79,6 @@ def search_guests(flg, key):
     results = []
     guests = get_guests_search()
     key = key.upper()
-    print("key: %s" % key)
     if flg == "Exact":
         for guest in guests:
             if guest.get_fname() == key or guest.get_lname() == key or guest.get_rm_number() == key or guest.get_phone() == key or guest.get_address() == key or guest.get_chk_in() == key or guest.get_chk_out() == key:

@@ -78,7 +78,5 @@ class CapabilitySeven:
         else:
             self.clear_frame()
             CapabilitySeven(self.frame)
-            # error_msg = "Phone number must be in the format: ###-###-####\nand Email must be in the format: example@email.com"
-            # self.popup_msg(error_msg)
             message_label = tk.Label(
                 self.frame, text="No results found").grid(row=8, column=0, padx=15, pady=5)
