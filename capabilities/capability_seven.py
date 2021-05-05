@@ -37,10 +37,8 @@ class CapabilitySeven:
 
     def set_toggle(self):
         if self.toggle_val.get() == 0:
-            self.toggle_val.set(0)
             self.search_flag = "Exact"
         elif self.toggle_val.get() == 1:
-            self.toggle_val.set(1)
             self.search_flag = "Contains"
 
     def display_results(self, guest_list):
