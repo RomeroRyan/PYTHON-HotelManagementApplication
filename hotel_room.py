@@ -1,46 +1,106 @@
+# CAPABILITY 1: CODE BLOCK
+
 import datetime
+from rooms_manager import update_room, get_hotel_rooms
 
-class HotelRoom:
-    """ Hotel Room Class """
-
-    def __init__(self, room_num="000", room_type="King", room_week=None):
-        self.room_num = room_num
-        self.room_type = room_type
-        self.room_week = room_week or {0: "Unavailable", 1: "Unavailable", 2: "Unavailable", 3: "Unavailable", 4: "Unavailable", 5: "Unavailable", 6: "Unavailable"}
-
-    def get_room_num(self):
-        return self.room_num
-
-    def set_room_num(self, room_num):
-        self.room_num = room_num
-
-    def get_room_type(self):
-        return self.room_type
-
-    def set_room_type(self, room_type):
-        self.room_type = room_type
-
-    def get_room_status(self):
-        return self.room_week[str(datetime.datetime.today().weekday())]
-
-    def set_room_status(self, status):
-        self.room_week[str(datetime.datetime.today().weekday())] = status
+try:
+    import Tkinter as tk
+    import ttk
+except ImportError:
+    try:
+        import tkinter as tk
+        import tkinter.ttk as ttk
+    except ImportError:
+        print("Could not import tkinter!")
 
 
-    def get_room_combo_name(self):
-        room_initials = ""
-        for word in self.room_type.split(" "):
-            room_initials += word[0]
-        return "{0} ({1})".format(self.room_num, room_initials)
+# =================================================================================================================
+class CapabilityOne:
+    def __init__(self, frame, tabs, guest_page):
+        self.frame = frame
+        self.room_list = get_hotel_rooms()
+        self.tabs = tabs
+        self.guest_page = guest_page
+        self.room_buttons_list = []
 
-    def get_room_color(self, day):
-        if day:
-            day = str(day)
-            if self.room_week[day] == "Occupied":
-                return "#FF8F51"
-            elif self.room_week[day] == "Dirty":
-                return "#F8FC3F"
-            elif self.room_week[day] == "Maintenance":
-                return "#FD5E5E"
-            elif self.room_week[day] == "Available":
-                return "#D9D9D9"
+        # CAPABILITY 1: initialize and set static labels (title and description)
+        title = tk.Label(self.frame, text="Room Status", font=("Times", 30, "bold"))
+        text = tk.Label(self.frame, text="Dirty = yellow \nOccupied = orange \nMaintenance = red", font=("Times", 12))
+
+        title.grid(row=0, column=1, columnspan=2, padx=5, pady=5)
+        text.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
+
+        # ----------------------------------------------------------------------------
+        # CAPABILITY 1: initialize buttons for every room in the hotel
+        for index, room in enumerate(self.room_list):
+            room_button = tk.Button(self.frame, text=room.get_room_combo_name(), font=("Times", 20), padx=25,
+                                    command=lambda index=index: self.change_room_status(index))
+            room_button.config(bg=self.room_list[index].get_room_color(datetime.datetime.today().weekday()))
+            room_button.grid(row=2 + int(index/4), column=index%4, padx=15, pady=15)
+            # append button into list
+            self.room_buttons_list.append(room_button)
+
+    # =========================================================================================================
+    # CAPABILITY 1: button actions
+
+    # User click on a room button, now we determines what it should do,
+    #   if room is Available, goes to Capability 6, allowing user to register a guest
+    #   if room is Occupied, goes to capability 6, displaying guest's information in room
+    #   if room is Dirty or Maintenance, performs switch_to_available()
+    def change_room_status(self, index):
+        if self.room_list[index].get_room_status() == "Available":
+            self.tabs.select(self.guest_page)
+        elif self.room_list[index].get_room_status() == "Occupied":
+            self.tabs.select(self.guest_page)
+        elif self.room_list[index].get_room_status() == "Dirty":
+            self.switch_to_available(index)
+        elif self.room_list[index].get_room_status() == "Maintenance":
+            self.switch_to_available(index)
+
+    # ----------------------------------------------------------------------------
+    # button clicked was room with status "Dirty" or "Maintenance",
+    #   User is ask if they wish to change room status to "Available" with yes/no buttons
+    #   if User clicks yes, perform change_available()
+    #   if User click no, does nothing
+    def switch_to_available(self, index):
+        # creates popup window
+        popup = tk.Tk()
+        popup.title("WARNING!")
+        popup.geometry("250x75")
+        popup_label = tk.Label(popup,
+                                text="Room " + self.room_list[index].get_room_num() +
+                                    " current status:  " + self.room_list[index].get_room_status() +
+                                    "\nChange status to Available?",
+                                font=("Times", 12), )
+        # create and set buttons
+        yes_button = tk.Button(popup, text="Yes", padx=25,
+                               command=lambda popup=popup, index=index: self.change_available(popup, index))
+        no_button = tk.Button(popup, text="No", padx=25, command=popup.destroy)
+        popup_label.grid(row=0, column=0, columnspan=2)
+        yes_button.grid(row=1, column=0)
+        no_button.grid(row=1, column=1)
+        popup.mainloop()
+
+    # ----------------------------------------------------------------------------
+    # User click 'yes' on changing room's status to "Available",
+    #   changes the current's room status to "Available"
+    def change_available(self, popup, room_index):
+        status = "Available"
+        self.room_list[room_index].set_current_room_status(str(datetime.datetime.today().weekday()), status)
+        update_room(room_index, status)
+        self.room_buttons_list[room_index].config(bg="#D9D9D9")
+        print("Room {0} set to status {1}".format(self.room_list[room_index].get_room_num(),
+                                                  self.room_list[room_index].get_current_room_status()))
+        # destroy popup
+        popup.destroy()
+
+        # destroy widgets to prevent memory leak
+        for widget in self.frame.winfo_children():
+            widget.destroy()
+
+        # delete vars to prevent memory leak
+        del self.room_list
+        del self.room_buttons_list
+        print("checkpoint: Will now call initializer")
+        CapabilityOne(self.frame, self.tabs, self.guest_page)
+
