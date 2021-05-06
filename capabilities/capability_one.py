@@ -20,42 +20,45 @@ class CapabilityOne:
         self.frame = frame
         self.room_list = get_hotel_rooms()
         self.tabs = tabs
-        self.guest_page = guest_page
-        self.room_buttons = []
+        self.guest_page = guest_page        # use to get to capability 6 when a button is click
+        self.room_buttons_list = []         # saves the list of buttons, allowing access to them with an index
 
+        # ----------------------------------------------------------------------------
         # CAPABILITY 1: initialize and set static labels (title and description)
+
+        # create labels
         title = tk.Label(self.frame, text="Room Status",
                          font=("Times", 30, "bold"))
-        text = tk.Label(
-            self.frame, text="Dirty = yellow \nOccupied = orange \nMaintenance = red", font=("Times", 12))
-
+        text = tk.Label(self.frame,
+                        text="Dirty = yellow \nOccupied = orange \nMaintenance = red", font=("Times", 12))
+        # set labels
         title.grid(row=0, column=1, columnspan=2, padx=5, pady=5)
         text.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
 
         # ----------------------------------------------------------------------------
-        # CAPABILITY 1: initialize buttons for every room in the hotel
+        # CAPABILITY 1: initialize and sets buttons for every room in the hotel
         for index, room in enumerate(self.room_list):
+            # create button
             room_button = tk.Button(self.frame, text=room.get_room_combo_name(), font=("Times", 20), padx=25,
                                     command=lambda index=index: self.change_room_status(index))
-            room_button.config(bg=self.room_list[index].get_room_color(
-                datetime.datetime.today().weekday()),)
-            room_button.grid(row=2 + int(index/4), column=index %
-                             4, padx=15, pady=15)
-            # append button into list
-            self.room_buttons.append(room_button)
+            # reconfig button color based on status
+            room_button.config(bg=self.room_list[index].get_room_color(datetime.datetime.today().weekday()),)
+            # set button in the frame
+            room_button.grid(row=2 + int(index/4), column=index % 4, padx=15, pady=15)
+            # append button into room_buttons_list for later access
+            self.room_buttons_list.append(room_button)
+    # END OF INITIALIZER
 
     # =========================================================================================================
-    # CAPABILITY 1: button actions
-
-    # User click on a room button, not determines what to do,
+    # CAPABILITY 1: button action (user click a room button, We now determine what to do here)
     #   if room is Available, goes to Capability 6, allowing user to register a guest
     #   if room is Occupied, goes to capability 6, displaying guest's information in room
     #   if room is Dirty or Maintenance, performs switch_to_available()
     def change_room_status(self, index):
         if self.room_list[index].get_room_status() == "Available":
-            self.tabs.select(self.guest_page)
+            self.tabs.select(self.guest_page)           # switches tab to capability 6
         elif self.room_list[index].get_room_status() == "Occupied":
-            self.tabs.select(self.guest_page)
+            self.tabs.select(self.guest_page)           # switches tab to capability 6
         elif self.room_list[index].get_room_status() == "Dirty":
             self.switch_to_available(index)
         elif self.room_list[index].get_room_status() == "Maintenance":
@@ -70,10 +73,10 @@ class CapabilityOne:
         # creates popup window
         popup = tk.Tk()
         popup.title("WARNING!")
-        popup.geometry("250x75")
+        popup.geometry("250x80")
         popup_label = tk.Label(popup,
                                text="Room " + self.room_list[index].get_room_num() +
-                               " current status:  " + self.room_list[index].get_room_status() +
+                               " current status: " + self.room_list[index].get_room_status() +
                                     "\nChange status to Available?",
                                font=("Times", 12), )
         # create and set buttons
@@ -88,23 +91,23 @@ class CapabilityOne:
     # ----------------------------------------------------------------------------
     # User click 'yes' on changing room's status to "Available",
     #   changes the current's room status to "Available"
+    #   delete all widgets and variables and re-initialize capability 1
     def change_available(self, popup, room_index):
+        # change status
         status = "Available"
         self.room_list[room_index].set_room_status(status)
         update_room(room_index, status)
-        self.room_buttons[room_index].config(bg="#D9D9D9")
         print("Room {0} set to status {1}".format(self.room_list[room_index].get_room_num(),
                                                   self.room_list[room_index].get_room_status()))
         # destroy popup
         popup.destroy()
 
-        # destroy widgets to prevent memory leak
+        # destroy all widgets in capability 1
         for widget in self.frame.winfo_children():
             widget.destroy()
-            print("checkpoint: Erasing widget (18 total)")
 
-        # delete vars to prevent memory leak
+        # delete unnecessary variables
         del self.room_list
-        del self.room_buttons
-        print("checkpoint: Will now call initializer")
+        del self.room_buttons_list
+        # re-initialize capability 1
         CapabilityOne(self.frame, self.tabs, self.guest_page)
