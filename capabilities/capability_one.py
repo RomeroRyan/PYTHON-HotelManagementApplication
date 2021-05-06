@@ -24,8 +24,10 @@ class CapabilityOne:
         self.room_buttons = []
 
         # CAPABILITY 1: initialize and set static labels (title and description)
-        title = tk.Label(self.frame, text="Room Status", font=("Times", 30, "bold"))
-        text = tk.Label(self.frame, text="Dirty = yellow \nOccupied = orange \nMaintenance = red", font=("Times", 12))
+        title = tk.Label(self.frame, text="Room Status",
+                         font=("Times", 30, "bold"))
+        text = tk.Label(
+            self.frame, text="Dirty = yellow \nOccupied = orange \nMaintenance = red", font=("Times", 12))
 
         title.grid(row=0, column=1, columnspan=2, padx=5, pady=5)
         text.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
@@ -35,8 +37,10 @@ class CapabilityOne:
         for index, room in enumerate(self.room_list):
             room_button = tk.Button(self.frame, text=room.get_room_combo_name(), font=("Times", 20), padx=25,
                                     command=lambda index=index: self.change_room_status(index))
-            room_button.config(bg=self.room_list[index].get_room_color(datetime.datetime.today().weekday()),)
-            room_button.grid(row=2 + int(index/4), column=index%4, padx=15, pady=15)
+            room_button.config(bg=self.room_list[index].get_room_color(
+                datetime.datetime.today().weekday()),)
+            room_button.grid(row=2 + int(index/4), column=index %
+                             4, padx=15, pady=15)
             # append button into list
             self.room_buttons.append(room_button)
 
@@ -68,10 +72,10 @@ class CapabilityOne:
         popup.title("WARNING!")
         popup.geometry("250x75")
         popup_label = tk.Label(popup,
-                                text="Room " + self.room_list[index].get_room_num() +
-                                    " current status:  " + self.room_list[index].get_room_status() +
+                               text="Room " + self.room_list[index].get_room_num() +
+                               " current status:  " + self.room_list[index].get_room_status() +
                                     "\nChange status to Available?",
-                                font=("Times", 12), )
+                               font=("Times", 12), )
         # create and set buttons
         yes_button = tk.Button(popup, text="Yes", padx=25,
                                command=lambda popup=popup, index=index: self.change_available(popup, index))
@@ -104,5 +108,3 @@ class CapabilityOne:
         del self.room_buttons
         print("checkpoint: Will now call initializer")
         CapabilityOne(self.frame, self.tabs, self.guest_page)
-
-        
