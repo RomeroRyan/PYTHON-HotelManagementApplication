@@ -68,16 +68,16 @@ def add_guest(guest, room, check_in, check_out):
     f.truncate()
 
     guests.append({
-        "fname": guest["fname"].get(),
-        "lname": guest["lname"].get(),
-        "phone": guest["phone"].get(),
-        "rm_number": room.room_num,
-        "address": guest["address"].get(),
-        "email": guest["email"].get(),
-        "chk_in": check_in,
-        "chk_out": check_out,
-        "id": guest["id"].get(),
-        "vehicle": guest["vehicle"].get(),
+        "fname": guest["fname"].get().upper(),
+        "lname": guest["lname"].get().upper(),
+        "phone": guest["phone"].get().upper(),
+        "rm_number": room.room_num.upper(),
+        "address": guest["address"].get().upper(),
+        "email": guest["email"].get().upper(),
+        "chk_in": check_in.upper(),
+        "chk_out": check_out.upper(),
+        "id": guest["id"].get().upper(),
+        "vehicle": guest["vehicle"].get().upper(),
         "img_path": guest["img_path"] or ".res/placeholder.png"
     })
     json.dump(guests, f, indent=4)
