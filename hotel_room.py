@@ -26,7 +26,6 @@ class HotelRoom:
     def set_room_status(self, status):
         self.room_week[str(datetime.datetime.today().weekday())] = status
 
-
     def get_room_combo_name(self):
         room_initials = ""
         for word in self.room_type.split(" "):
