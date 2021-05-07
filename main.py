@@ -100,7 +100,7 @@ def main():
     guests = get_guests()
     capability_one = CapabilityOne(frame1, my_tabs, frame6)
     capability_two = CapabilityTwo(frame2)
-    capability_three = CapabilityThree(frame3)
+    capability_three = CapabilityThree(frame3, my_tabs, frame5)
     capability_four = CapabilityFour(frame4)
     capability_five = CapabilityFive(frame5, guests[0].get_id())
     capability_six = CapabilitySix(frame6)

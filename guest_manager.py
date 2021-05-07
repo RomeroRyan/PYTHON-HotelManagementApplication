@@ -2,8 +2,6 @@ import json
 import string
 import os.path
 from guest import Guest
-# 11
-# pass an index to update and an array of the field values
 
 def update_guest(id, fields):
     f = open(os.path.dirname(__file__) + '/data/guest.json', 'r+')
@@ -30,7 +28,6 @@ def update_guest_by_room(room):
     f.seek(0)
     f.truncate()
     for index, guest in enumerate(guests):
-        print(guest["rm_number"], room)
         if guest["rm_number"] == room:
             guests.pop(index)
             break

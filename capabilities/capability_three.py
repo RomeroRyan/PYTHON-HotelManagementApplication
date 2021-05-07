@@ -1,4 +1,4 @@
-from rooms_manager import get_hotel_rooms, update_room_by_number
+from rooms_manager import get_hotel_rooms, update_room_by_number, get_hotel_room_by_num
 from guest_manager import add_guest, get_guests, update_guest_by_room
 
 import datetime
@@ -13,33 +13,36 @@ except ImportError:
         print("Could not import tkinter!")
 
 class CapabilityThree:
-    def __init__(self, frame):
+    def __init__(self, frame, notebook, guest_profile_frame):
         self.frame = frame
         self.current_state = []
-        self.previous_state = []
+        self.notebook = notebook
+        self.profile_frame = guest_profile_frame
 
-        self.reserved_rooms = []
+        self.show_main()
 
-        guest_registration_title = tk.Label(frame, text="Guest Registration", font=("Times", 20, "bold"))
+    def show_main(self):
+        self.clear_current_state()
+
+        guest_registration_title = tk.Label(self.frame, text="Guest Registration", font=("Times", 20, "bold"))
         guest_registration_title.grid(row = 1, column = 3, padx=15, pady=15)
         self.current_state.append(guest_registration_title)
 
-        check_reservations = tk.Button(frame, text="Add Reservation", command=self.show_guest_reservation)
+        check_reservations = tk.Button(self.frame, text="Add Reservation", command=self.show_guest_reservation)
         check_reservations.grid(row = 2, column = 1, padx=15, pady=15)
         self.current_state.append(check_reservations)
 
-        delete_reservations = tk.Button(frame, text="Delete Reservation", command=self.show_delete_reservation)
+        delete_reservations = tk.Button(self.frame, text="Delete Reservation", command=self.show_delete_reservation)
         delete_reservations.grid(row = 2, column = 2, padx=15, pady=15)
         self.current_state.append(delete_reservations)
 
-        show_reservations = tk.Button(frame, text="Show Reservations", command=self.show_reservations)
+        show_reservations = tk.Button(self.frame, text="Show Reservations", command=self.show_reservations)
         show_reservations.grid(row = 2, column = 3, padx=15, pady=15)
         self.current_state.append(show_reservations)
 
     def clear_current_state(self):
         for widget in self.current_state:
             widget.grid_remove()
-        self.previous_state.append(self.current_state)
         self.current_state = []
 
     def show_guest_reservation(self):
@@ -72,7 +75,6 @@ class CapabilityThree:
         phone_entry = tk.Entry(self.frame, font=("Times", 20, "bold"))
         phone_entry.grid(row = 4, column = 2, padx=15, pady=15)
         self.current_state.append(phone_entry)
-
 
         vehicle_plate = tk.Label(self.frame, text="ID No.", font=("Times", 20, "bold"))
         vehicle_plate.grid(row = 2, column = 3, padx=15, pady=15)
@@ -175,7 +177,12 @@ class CapabilityThree:
                                 "img_path": ".res/placeholder.png"
                             }, check_in=check_in_entry, check_out=check_out_entry: self.add_reservation(room_type, guest, check_in, check_out))
         reserve.grid(row = 15, column = 2, padx=15, pady=15)
-        self.current_state.append(check_availability)
+        self.current_state.append(reserve)
+        
+        go_back = tk.Button(self.frame, text="Back", command=self.show_main)
+        go_back.grid(row = 16, column = 1, padx=15, pady=15)
+        self.current_state.append(go_back)
+
 
     def show_reservations(self):
         self.clear_current_state()
@@ -183,11 +190,35 @@ class CapabilityThree:
         group = tk.LabelFrame(self.frame, text="Rooms", font=("Times", 20, "bold"))
         guests = get_guests()
 
-        # Hardcoded
-        # for i, room in enumerate(self.reserved_rooms):
-        #     room = tk.Button(group, text="Room " + room.rm_number, font=("Times", 20, "bold"), bg="orange", command=self.show_guest_reservation)
-        #     room.grid(row = i, column = 1, padx=15, pady=15)
-        # group.grid(row = 1, column = 1, padx=15, pady=15)
+        for i, room in enumerate(guests):
+            hotel_room_obj = get_hotel_room_by_num(room.rm_number)
+            if hotel_room_obj is None:
+                print("Invalid room reserved!")
+                continue
+            room_color = hotel_room_obj.get_room_color(datetime.datetime.today().weekday())
+            room_button = tk.Button(group, text="Room " + room.rm_number, font=("Times", 20, "bold"), bg=room_color, command=lambda guest=room: self.switch_to_guest_profile(guest))
+            room_button.grid(row = i, column = 1, padx=15, pady=15)
+        group.grid(row = 1, column = 1, padx=15, pady=15)
+
+        go_back = tk.Button(self.frame, text="Back", command=self.show_main)
+        go_back.grid(row = 15, column = 1, padx=15, pady=15)
+        self.current_state.append(go_back)
+
+    def clear_and_set(self, widget_name, text):
+        self.profile_frame.nametowidget(widget_name).delete(0, len(self.profile_frame.nametowidget(widget_name).get()))
+        self.profile_frame.nametowidget(widget_name).insert(0, text)
+
+
+    def switch_to_guest_profile(self, guest):
+        self.clear_and_set("fname", guest.fname)
+        self.clear_and_set("lname", guest.lname)
+        self.clear_and_set("phone", guest.phone)
+        self.clear_and_set("address", guest.address)
+        self.clear_and_set("email", guest.email)
+        self.clear_and_set("id", guest.id)
+        self.clear_and_set("license", guest.vehicle)
+
+        self.notebook.select(4)
 
     def show_delete_reservation(self):
         self.clear_current_state()
@@ -197,14 +228,22 @@ class CapabilityThree:
         self.current_state.append(guest_registration_title)
 
         group = tk.LabelFrame(self.frame, text="Rooms", font=("Times", 20, "bold"))
+        self.current_state.append(group)
         guests = get_guests()
         
-        # Hardcoded
-        for i, guest in enumerate(self.reserved_rooms):
+        for i, guest in enumerate(guests):
             room = guest.rm_number
             room_button = tk.Button(group, text="Room " + room, font=("Times", 20, "bold"), bg="orange", command=lambda guest=guest: self.delete_reservation(guest))
             room_button.grid(row = i, column = 1, padx=15, pady=15)
+            self.current_state.append(room_button)
+
         group.grid(row = 12, column = 7, padx=2, pady=2)
+
+        go_back = tk.Button(self.frame, text="Back", command=self.show_main)
+        go_back.grid(row = 13, column = 1, padx=15, pady=15)
+        self.current_state.append(go_back)
+
+
 
     def add_reservation(self, room_type, guest, check_in, check_out):
         rooms = get_hotel_rooms()
@@ -228,8 +267,6 @@ class CapabilityThree:
         print("Not Available")
 
     def room_is_available(self, room, check_in, check_out):
-        
-
         for i in range(check_in.weekday() % 7, check_out.weekday()%7):
             if room.room_week[str(i)] != "Available":
                 return False
@@ -239,6 +276,9 @@ class CapabilityThree:
         room = guest.rm_number
         update_room_by_number(room, "Available")
         update_guest_by_room(room)
+
+        self.show_delete_reservation()
+
 
     def go_back(self):
         previous_state = self.previous_state.pop()

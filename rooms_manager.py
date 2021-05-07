@@ -43,3 +43,11 @@ def get_hotel_rooms():
         room_list.append(
             HotelRoom(room["room_num"], room["room_type"], room_week=room["days"]))
     return room_list
+
+def get_hotel_room_by_num(num):
+    rooms = get_raw_rooms()
+
+    for room in rooms:
+        if room["room_num"] == num:
+            return HotelRoom(room["room_num"], room["room_type"], room_week=room["days"])
+    return None
