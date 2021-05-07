@@ -1,4 +1,4 @@
-from rooms_manager import get_hotel_rooms, update_room_by_number, get_hotel_room_by_num
+from rooms_manager import get_hotel_rooms, update_room, update_room_by_number, get_hotel_room_by_num
 from guest_manager import add_guest, get_guests, update_guest_by_room
 
 import datetime
@@ -117,11 +117,11 @@ class CapabilityThree:
         self.current_state.append(check_in_entry)
 
         check_out = tk.Label(self.frame, text="Check Out", font=("Times", 20, "bold"))
-        check_out.grid(row = 8, column = 1, padx=15, pady=15)
+        check_out.grid(row = 7, column = 3, padx=15, pady=15)
         self.current_state.append(check_out)
 
         check_out_entry = tk.Entry(self.frame, font=("Times", 20, "bold"))
-        check_out_entry.grid(row = 8, column = 2, padx=15, pady=15)
+        check_out_entry.grid(row = 7, column = 4, padx=15, pady=15)
         self.current_state.append(check_out_entry)
 
         room_type = tk.Label(self.frame, text="Room Type", font=("Times", 20, "bold"))
@@ -132,13 +132,13 @@ class CapabilityThree:
         room_type_entry.grid(row = 6, column = 4, padx=15, pady=15)
         self.current_state.append(room_type_entry)
 
-        room_num = tk.Label(self.frame, text="Room No.", font=("Times", 20, "bold"))
-        room_num.grid(row = 7, column = 3, padx=15, pady=15)
-        self.current_state.append(room_num)
+        # room_num = tk.Label(self.frame, text="Room No.", font=("Times", 20, "bold"))
+        # room_num.grid(row = 7, column = 3, padx=15, pady=15)
+        # self.current_state.append(room_num)
 
-        room_num_entry = tk.Entry(self.frame, font=("Times", 20, "bold"))
-        room_num_entry.grid(row = 7, column = 4, padx=15, pady=15)
-        self.current_state.append(room_num_entry)
+        # room_num_entry = tk.Entry(self.frame, font=("Times", 20, "bold"))
+        # room_num_entry.grid(row = 7, column = 4, padx=15, pady=15)
+        # self.current_state.append(room_num_entry)
 
         # Fixed values for now
         daily_rate = tk.Label(self.frame, text="Daily Rate", font=("Times", 20, "bold"))
@@ -157,7 +157,7 @@ class CapabilityThree:
         total_charge_value.grid(row = 14, column = 2, padx=15, pady=15)
         self.current_state.append(total_charge_value)
 
-        check_availability = tk.Button(self.frame, text="Check Availability", command=lambda room=room_num_entry,
+        check_availability = tk.Button(self.frame, text="Check Availability", command=lambda room=room_type_entry,
                                         check_in=check_in_entry, check_out=check_out_entry: self.room_is_available(room, check_in, check_out, convert=True))
         check_availability.grid(row = 15, column = 1, padx=15, pady=15)
         self.current_state.append(check_availability)
@@ -170,7 +170,6 @@ class CapabilityThree:
                                 "address": address_entry,
                                 "email": email_entry,
                                 "vehicle": vehicle_plate_entry,
-                                "rm_number": room_num_entry,
                                 "id": id_entry,
                                 "room_type": room_type_entry,
                                 "chk_in": check_in_entry,
@@ -245,28 +244,53 @@ class CapabilityThree:
         go_back.grid(row = 13, column = 1, padx=15, pady=15)
         self.current_state.append(go_back)
 
+    def transform_to_datetime(self, date):
+        if re.match(r'\d{2}\/\d{2}\/\d{4}', date) is None:
+            print("Invalid Check-in/Check-out format. Please use MM/DD/YYYY format!")
+            return None
+        
+        stripped_date = date.split('/')
 
+        return datetime.date(month=int(stripped_date[0]), day=int(stripped_date[1]), year=int(stripped_date[2]))
 
     def add_reservation(self, room_type, guest, check_in, check_out):
         rooms = get_hotel_rooms()
         check_in = check_in.get()
         check_out = check_out.get()
-            
-        if re.match(r'\d{2}\/\d{2}\/\d{4}', check_in) is None or re.match(r'\d{2}\/\d{2}\/\d{4}', check_out) is None:
-            print("Invalid Check-in/Check-out format. Please use MM/DD/YYYY format!")
-            return False
-        
-        stripped_checkin = check_in.split('/')
-        stripped_checkout = check_out.split('/')
 
-        check_in_date = datetime.date(month=int(stripped_checkin[0]), day=int(stripped_checkin[1]), year=int(stripped_checkin[2]))
-        check_out_date = datetime.date(month=int(stripped_checkout[0]), day=int(stripped_checkout[1]), year=int(stripped_checkout[2]))
+        check_in_date = self.transform_to_datetime(check_in)
+        check_out_date = self.transform_to_datetime(check_out)
+            
+        if not check_in_date or not check_out_date:
+            print("Invalid Date. Please use MM/DD/YYYY format!")
+            return
+
+        for index, room in enumerate(rooms):
+            if room.room_type == room_type.get() and self.room_is_available(room, check_in_date, check_out_date):
+                add_guest(guest, room, check_in, check_out)
+                update_room(index, "Unavailable", check_in_date.weekday(), check_out_date.weekday())
+                print("Room Reserved")
+                return
+
+    def check_availability(self, room_type, check_in, check_out):
+        check_in = check_in.get()
+        check_out = check_out.get()
+        rooms = get_hotel_rooms()
+
+        check_in_date = self.transform_to_datetime(check_in)
+        check_out_date = self.transform_to_datetime(check_out)
+            
+        if not check_in_date or not check_out_date:
+            print("Invalid Date. Please use MM/DD/YYYY format!")
+            return False
 
         for room in rooms:
             if room.room_type == room_type.get() and self.room_is_available(room, check_in_date, check_out_date):
-                add_guest(guest, room, check_in, check_out)
-                print("Room Reserved")
-                return
+                print("Room Available")
+                return True
+
+        print("Room Unavailable")
+        return False
 
     def room_is_available(self, room, check_in, check_out, convert=False):
         if convert:
@@ -274,15 +298,16 @@ class CapabilityThree:
             check_in = check_in.get()
             check_out = check_out.get()
                 
-            if re.match(r'\d{2}\/\d{2}\/\d{4}', check_in) is None or re.match(r'\d{2}\/\d{2}\/\d{4}', check_out) is None:
-                print("Invalid Check-in/Check-out format. Please use MM/DD/YYYY format!")
-                return False
-            
-            stripped_checkin = check_in.split('/')
-            stripped_checkout = check_out.split('/')
+            check_in_date = self.transform_to_datetime(check_in)
+            check_out_date = self.transform_to_datetime(check_out)
 
-            check_in_date = datetime.date(month=int(stripped_checkin[0]), day=int(stripped_checkin[1]), year=int(stripped_checkin[2]))
-            check_out_date = datetime.date(month=int(stripped_checkout[0]), day=int(stripped_checkout[1]), year=int(stripped_checkout[2]))
+            if not check_in_date or not check_out_date:
+                print("Invalid Date. Please use MM/DD/YYYY format!")
+                return False
+
+            if check_in == check_out:
+                print("Please only reserve rooms for 6 days or less and cannot check-in and check_out on the same day!")
+                return
 
             for i in range(check_in_date.weekday() % 7, check_out_date.weekday()%7):
                 if room.room_week[str(i)] != "Available":
@@ -291,7 +316,9 @@ class CapabilityThree:
             print("Room Available")
             return True
 
-
+        if check_in == check_out:
+            print("Please only reserve rooms for 6 days or less and cannot check-in and check_out on the same day!")
+            return 
         for i in range(check_in.weekday() % 7, check_out.weekday()%7):
             if room.room_week[str(i)] != "Available":
                 print("Room Unavailable")
@@ -301,7 +328,7 @@ class CapabilityThree:
 
     def delete_reservation(self, guest):
         room = guest.rm_number
-        update_room_by_number(room, "Available")
+        update_room_by_number(room, "Available", self.transform_to_datetime(guest.chk_in).weekday(), self.transform_to_datetime(guest.chk_out).weekday())
         update_guest_by_room(room)
 
         self.show_delete_reservation()

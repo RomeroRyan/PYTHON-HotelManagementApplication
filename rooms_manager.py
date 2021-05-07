@@ -5,17 +5,26 @@ import datetime
 from hotel_room import HotelRoom
 
 
-def update_room(index, status):
+def update_room(index, status, check_in=None, check_out=None):
     f = open(os.path.dirname(__file__) + '/data/rooms.json', 'r+')
     rooms = json.load(f)
-    day_index = datetime.datetime.today().weekday()
     f.seek(0)
     f.truncate()
-    rooms[index]["days"][str(day_index)] = status
+    if check_in is not None and check_out is not None:
+        if check_in == check_out:
+            print("Please only reserve rooms for 6 days or less and cannot check-in and check_out on the same day!")
+            return 
+        for day in range(check_in, (check_in + check_out) % 7):
+            rooms[index]["days"][str(day%7)] = status
+    else:
+        day = datetime.datetime.today().weekday()
+        rooms[index]["days"][str(day%7)] = status
+
+        
     json.dump(rooms, f, indent=4)
     f.close()
 
-def update_room_by_number(room_number, status):
+def update_room_by_number(room_number, status, check_in, check_out):
     f = open(os.path.dirname(__file__) + '/data/rooms.json', 'r+')
     rooms = json.load(f)
     f.seek(0)
@@ -23,8 +32,8 @@ def update_room_by_number(room_number, status):
 
     for room in rooms:
         if room["room_num"] == room_number:
-            room["room_status"] = status
-
+            for day in range(check_in, check_out):
+                room["days"][str(day%7)] = status
     json.dump(rooms, f, indent=4)
     f.close()
 
