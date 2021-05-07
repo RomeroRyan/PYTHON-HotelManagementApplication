@@ -54,6 +54,8 @@ def get_guests():
                   rm_number=guest["rm_number"],
                   address=guest["address"],
                   email=guest["email"],
+                  chk_in=guest["chk_in"],
+                  chk_out=guest["chk_out"],
                   id=guest["id"],
                   vehicle=guest["vehicle"],
                   img_path=guest["img_path"]))

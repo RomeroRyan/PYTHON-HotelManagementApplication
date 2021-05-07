@@ -13,11 +13,11 @@ except ImportError:
         print("Could not import tkinter!")
 
 class CapabilityThree:
-    def __init__(self, frame, notebook, guest_profile_frame):
+    def __init__(self, frame, notebook, guest_stay_frame):
         self.frame = frame
         self.current_state = []
         self.notebook = notebook
-        self.profile_frame = guest_profile_frame
+        self.stay_frame = guest_stay_frame
 
         self.show_main()
 
@@ -206,20 +206,18 @@ class CapabilityThree:
         self.current_state.append(go_back)
 
     def clear_and_set(self, widget_name, text):
-        self.profile_frame.nametowidget(widget_name).delete(0, len(self.profile_frame.nametowidget(widget_name).get()))
-        self.profile_frame.nametowidget(widget_name).insert(0, text)
-
+        self.stay_frame.nametowidget(widget_name).config(text=text)
 
     def switch_to_guest_profile(self, guest):
-        self.clear_and_set("fname", guest.fname)
-        self.clear_and_set("lname", guest.lname)
-        self.clear_and_set("phone", guest.phone)
-        self.clear_and_set("address", guest.address)
-        self.clear_and_set("email", guest.email)
-        self.clear_and_set("id", guest.id)
-        self.clear_and_set("license", guest.vehicle)
+        self.clear_and_set("name", guest.fname + " " + guest.lname)
+        self.clear_and_set("check_in", guest.chk_in)
+        self.clear_and_set("check_out", guest.chk_out)
+        self.clear_and_set("rate", "$10")
+        self.clear_and_set("total", "$110")
+        self.clear_and_set("paid", "$100")
+        self.clear_and_set("remain", "$10")
 
-        self.notebook.select(4)
+        self.notebook.select(5)
 
     def show_delete_reservation(self):
         self.clear_current_state()
