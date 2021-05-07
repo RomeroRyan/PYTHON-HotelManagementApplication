@@ -103,7 +103,7 @@ class CapabilityFour:
     def confirm_button(self, bathroom, towels, vacuum, dust, bed, electronic, index):
         if(bathroom.get() == 1 and towels.get() == 1 and vacuum.get() == 1 and
            dust.get() == 1 and bed.get() == 1 and electronic.get() == 1):
-            print("All are checked!")
+            # create popup
             popup = tk.Tk()
             popup.title("Modify?")
             popup.geometry("225x60")
@@ -129,6 +129,7 @@ class CapabilityFour:
     #   if yes, will update room's status with function call change_status()
     #   if no, does nothing
     def maintenance_button(self, index):
+        # create popup
         popup = tk.Tk()
         popup.title("Modify?")
         popup.geometry("225x60")
