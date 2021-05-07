@@ -1,0 +1,20 @@
+{
+    "checkins": [
+        {
+            "fname": "JOHN",
+            "lname": "DOE",
+            "phone": "323-323-3231",
+            "address": "3232 FIRST STREET",
+            "email": "JDOE@GMAIL.COM",
+            "id": "Y1234982",
+            "vehicle": "BIG CAR",
+            "img_path": "./res/placeholder.png",
+            "rm_number": "101",
+            "chk_in": "02/28/2021",
+            "chk_out": "03/01/2021"
+        }
+    ],
+    "checkouts": [
+        
+    ]
+}
