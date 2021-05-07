@@ -157,7 +157,8 @@ class CapabilityThree:
         total_charge_value.grid(row = 14, column = 2, padx=15, pady=15)
         self.current_state.append(total_charge_value)
 
-        check_availability = tk.Button(self.frame, text="Check Availability")
+        check_availability = tk.Button(self.frame, text="Check Availability", command=lambda room=room_num_entry,
+                                        check_in=check_in_entry, check_out=check_out_entry: self.room_is_available(room, check_in, check_out, convert=True))
         check_availability.grid(row = 15, column = 1, padx=15, pady=15)
         self.current_state.append(check_availability)
         
@@ -188,6 +189,7 @@ class CapabilityThree:
         self.clear_current_state()
 
         group = tk.LabelFrame(self.frame, text="Rooms", font=("Times", 20, "bold"))
+        self.current_state.append(group)
         guests = get_guests()
 
         for i, room in enumerate(guests):
@@ -263,13 +265,38 @@ class CapabilityThree:
         for room in rooms:
             if room.room_type == room_type.get() and self.room_is_available(room, check_in_date, check_out_date):
                 add_guest(guest, room, check_in, check_out)
+                print("Room Reserved")
                 return
-        print("Not Available")
 
-    def room_is_available(self, room, check_in, check_out):
+    def room_is_available(self, room, check_in, check_out, convert=False):
+        if convert:
+            room = get_hotel_room_by_num(room.get())
+            check_in = check_in.get()
+            check_out = check_out.get()
+                
+            if re.match(r'\d{2}\/\d{2}\/\d{4}', check_in) is None or re.match(r'\d{2}\/\d{2}\/\d{4}', check_out) is None:
+                print("Invalid Check-in/Check-out format. Please use MM/DD/YYYY format!")
+                return False
+            
+            stripped_checkin = check_in.split('/')
+            stripped_checkout = check_out.split('/')
+
+            check_in_date = datetime.date(month=int(stripped_checkin[0]), day=int(stripped_checkin[1]), year=int(stripped_checkin[2]))
+            check_out_date = datetime.date(month=int(stripped_checkout[0]), day=int(stripped_checkout[1]), year=int(stripped_checkout[2]))
+
+            for i in range(check_in_date.weekday() % 7, check_out_date.weekday()%7):
+                if room.room_week[str(i)] != "Available":
+                    print("Room Unavailable")
+                    return False
+            print("Room Available")
+            return True
+
+
         for i in range(check_in.weekday() % 7, check_out.weekday()%7):
             if room.room_week[str(i)] != "Available":
+                print("Room Unavailable")
                 return False
+        print("Room Available")
         return True
 
     def delete_reservation(self, guest):
