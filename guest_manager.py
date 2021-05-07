@@ -1,7 +1,13 @@
 import json
 import string
 import os.path
+import datetime
+
 from guest import Guest
+
+def transform_to_weekday(date):
+    stripped_date = date.split('/')
+    return datetime.date(month=int(stripped_date[0]), day=int(stripped_date[1]), year=int(stripped_date[2])).weekday()
 
 def update_guest(id, fields):
     f = open(os.path.dirname(__file__) + '/data/guest.json', 'r+')
@@ -40,7 +46,6 @@ def get_raw_guests():
     guests = json.load(f)
     f.close()
     return guests
-
 
 def get_guests():
     guest_list = []
@@ -101,13 +106,45 @@ def get_guests_search():
                   guest["chk_out"]))
     return guests
 
-
 def find_guest(guest_id):
     guests = get_guests()
     for guest in guests:
         if guest.get_id() == guest_id:
             return guest
 
+def is_between(day, check_in, check_out):
+    # go until we get to index check_out
+    # if we hit the day, then return true
+    # else return false
+
+    if check_in == day or check_out == day:
+        return True
+
+    days = [0, 1, 2, 3, 4, 5, 6]
+    curr = check_in
+    found = False
+
+    while not found:
+        curr = (curr + 1) % len(days)
+        if days[curr] == day:
+            return True
+        if curr == check_out:
+            return False
+    
+
+def get_guest_by_room_and_day(room, day):
+    guests = get_guests()
+    if day == 0:
+        day = 6
+    else:
+        day = day - 1
+    for guest in guests:
+        check_in = transform_to_weekday(guest.chk_in)
+        check_out = transform_to_weekday(guest.chk_out)
+
+        if guest.rm_number == room.room_num and is_between(day, check_in, check_out):
+            return guest
+    return None
 
 def search_guests(flg, key):
     results = []

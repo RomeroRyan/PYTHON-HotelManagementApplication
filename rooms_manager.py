@@ -4,7 +4,6 @@ import datetime
 
 from hotel_room import HotelRoom
 
-
 def update_room(index, status, check_in=None, check_out=None):
     f = open(os.path.dirname(__file__) + '/data/rooms.json', 'r+')
     rooms = json.load(f)
@@ -42,7 +41,6 @@ def get_raw_rooms():
     rooms = json.load(f)
     f.close()
     return rooms
-
 
 def get_hotel_rooms():
     room_list = []
