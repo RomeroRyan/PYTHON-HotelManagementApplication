@@ -2,7 +2,9 @@ import tkinter as tk
 
 # Guest Profile
 class CapabilitySix:
-    def __init__(self, frame): 
+    def __init__(self, frame, notebook): 
+        self.notebook = notebook
+
         title_label = tk.Label(frame, text="Current Guest Show Screen", bg= 'steel blue')
         title_label.grid(row=0, column = 0, columnspan =1)
 
@@ -47,3 +49,9 @@ class CapabilitySix:
 
         remain = tk.Label(frame, width=30, text = "", bg='#C4C4C4', name="remain")
         remain.grid(row=7, column=1)
+
+        registerbutton = tk.Button(frame, text="Register", font=("Times", 20, "bold"), bg="#C4C4C4", command=lambda tab=2: self.notebook.select(tab))
+        registerbutton.grid(row = 8, column = 1, padx=15, pady=15)
+
+        registerbutton = tk.Button(frame, text="Register", font=("Times", 20, "bold"), bg="#C4C4C4", command=lambda tab=2: self.notebook.select(tab))
+        registerbutton.grid(row = 8, column = 1, padx=15, pady=15)

@@ -55,19 +55,35 @@ class CapabilityOne:
     # BUTTON WAS CLICK (determine what to do after click)
     #   if room is Available, goes to Capability 6, allowing user to register a guest
     #   if room is Occupied, goes to capability 6, displaying guest's information in room
-    #   if room is Dirty or Maintenance, performs update_status_check()
+    #   if room is Dirty or Maintenance, performs switch_to_available()
+    def get_guests(self, widget_name, text):
+        self.stay_frame.nametowidget(widget_name).config(text=text)
+
     def change_room_status(self, index):
-        if self.room_list[index].get_room_status() == "Available":
+        room = get_hotel_rooms()
+        if room[index].get_room_status() == "Available":
             self.tabs.select(self.guest_page)           # switches tab to capability 6
-        elif self.room_list[index].get_room_status() == "Occupied":
-            self.tabs.select(self.guest_page)           # switches tab to capability 6
-        elif self.room_list[index].get_room_status() == "Dirty":
+        elif room[index].get_room_status() == "Occupied":
+                     # switches tab to capability 6
+            self.get_guests("name", guest.fname + " " + guest.lname)
+            self.get_guests("check_in", guest.chk_in)
+            self.get_guests("check_out", guest.chk_out)
+            self.get_guests("rate", "$10")
+            self.get_guests("total", "$110")
+            self.get_guests("paid", "$100")
+            self.get_guests("remain", "$10")
+            self.tabs.select(self.guest_page) 
+            
+        elif room[index].get_room_status() == "Dirty":
             self.update_status_check(index)
-        elif self.room_list[index].get_room_status() == "Maintenance":
+        elif room[index].get_room_status() == "Maintenance":
             self.update_status_check(index)
 
-    # ---------------------------------------------------------------------------------------------------------
-    # BUTTON CLICKED WAS ROOM WITH STATUS: "Dirty" or "Maintenance",
+
+    
+
+    # ----------------------------------------------------------------------------
+    # button clicked was room with status "Dirty" or "Maintenance",
     #   User is ask if they wish to change room status to "Available" with yes/no buttons
     #   if User clicks yes, perform change_available()
     #   if User click no, does nothing

@@ -11,10 +11,80 @@
             "img_path": "./res/placeholder.png",
             "rm_number": "101",
             "chk_in": "02/28/2021",
-            "chk_out": "03/01/2021"
-        }
+            "chk_out": "03/01/2021",
+            "paid_total": "400"
+        },
+        {
+            "fname": "JOHN",
+            "lname": "DOE",
+            "phone": "323-323-3231",
+            "address": "3232 FIRST STREET",
+            "email": "JDOE@GMAIL.COM",
+            "id": "Y1234982",
+            "vehicle": "BIG CAR",
+            "img_path": "./res/placeholder.png",
+            "rm_number": "101",
+            "chk_in": "02/28/2021",
+            "chk_out": "03/01/2021",
+            "paid_total": "400"
+        },
+        {
+            "fname": "BRITTANY",
+            "lname": "LEE",
+            "phone": "123-456-7890",
+            "address": "123 SESAME STREET",
+            "email": "BLEE@GMAIL.COM",
+            "id": "Q0000444",
+            "vehicle": "SMALLCAR",
+            "img_path": "./res/placeholder.png",
+            "rm_number": "402",
+            "chk_in": "02/28/2021",
+            "chk_out": "03/01/2021",
+            "paid_total": "400"
+        } 
     ],
     "checkouts": [
-        
+        {
+            "fname": "JAMES",
+            "lname": "PETERS",
+            "phone": "000-000-0000",
+            "address": "100 JACKSON AVE",
+            "email": "JOPETERS@GMAIL.COM",
+            "id": "M0888812",
+            "vehicle": "P1034R2",
+            "img_path": "./res/placeholder.png",
+            "rm_number": "300",
+            "chk_in": "02/27/2021",
+            "chk_out": "03/05/2021",
+            "paid_total": "200"
+        },
+        {
+            "fname": "JANE",
+            "lname": "PETERS",
+            "phone": "000-000-0000",
+            "address": "100 JACKSON AVE",
+            "email": "JAPETERS@GMAIL.COM",
+            "id": "R23243532",
+            "vehicle": "K100Q11",
+            "img_path": "./res/placeholder.png",
+            "rm_number": "303",
+            "chk_in": "04/10/2021",
+            "chk_out": "04/20/2021",
+            "paid_total": "400"
+        },
+        {
+            "fname": "PETER",
+            "lname": "PARKER",
+            "phone": "323-102-0093",
+            "address": "20 INGRAM STREET",
+            "email": "PPARKER@GMAIL.COM",
+            "id": "T9903483",
+            "vehicle": "Q22KP95",
+            "img_path": "./res/placeholder.png",
+            "rm_number": "507",
+            "chk_in": "04/20/2021",
+            "chk_out": "04/25/2021",
+            "paid_total": "650"
+        }
     ]
 }

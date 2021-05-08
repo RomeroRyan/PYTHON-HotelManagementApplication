@@ -20,7 +20,8 @@ def add_section(guest, section):
         "chk_out": guest["check_out"],
         "id": guest["id"],
         "vehicle": guest["vehicle"],
-        "img_path": guest["img_path"] or ".res/placeholder.png"
+        "img_path": guest["img_path"] or ".res/placeholder.png",
+        "paid_total": guest["paid_total"]
     })
     json.dump(sections, f, indent=4)
     f.close()
@@ -41,7 +42,8 @@ def get_report_section(section):
                   chk_out=guest["chk_out"],
                   id=guest["id"],
                   vehicle=guest["vehicle"],
-                  img_path=guest["img_path"]))
+                  img_path=guest["img_path"],
+                  paid_total=guest["paid_total"]))
     return sections_list
 
 def get_raw_report():

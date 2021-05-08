@@ -31,16 +31,18 @@ class CapabilityEight:
 
 
         for i, guest in enumerate(self.checkins):
-            room_label = tk.Label(self.checkin_group, text= str(i+1) + ". " + guest.rm_number)
-            room_label.grid(row=i+2, column = 0)
+            room_label = tk.Label(self.checkin_group, text= str(i+1) + ".Room# " + guest.rm_number)
+            room_label.grid(row=i+3, column = i+1)
             guest_label = tk.Label(self.checkin_group, text=guest.fname + " " + guest.lname)
-            guest_label.grid(row=i+3, column = 0)
+            guest_label.grid(row=i+4, column = i+1)
 
         for i, guest in enumerate(self.checkouts):
-            room_label = tk.Label(self.checkout_group, text= str(i+1) + ". " + guest.rm_number)
-            room_label.grid(row=i+2, column = 1)
+            room_label = tk.Label(self.checkout_group, text= str(i+1) + ". Room#" + guest.rm_number)
+            room_label.grid(row=i+5, column = i+1)
             guest_label = tk.Label(self.checkout_group, text=guest.fname + " " + guest.lname)
-            guest_label.grid(row=i+3, column = 1)
+            guest_label.grid(row=i+6, column = i+1)
+            paid_label = tk.Label(self.checkout_group, text= "Paid: $" + guest.paid_total)
+            paid_label.grid(row=i+7, column = i+1)
 
-        total_label = tk.Label(frame, text="Total: $ 1080")
+        total_label = tk.Label(frame, text="Total: $ 1250")
         total_label.grid(row=99, column = 6)
