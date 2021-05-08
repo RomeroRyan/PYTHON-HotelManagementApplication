@@ -3,13 +3,13 @@
         "room_num": "101",
         "room_type": "King",
         "days": {
-            "0": "Dirty",
+            "0": "Available",
             "1": "Available",
             "2": "Available",
-            "3": "Maintenance",
+            "3": "Available",
             "4": "Available",
             "5": "Available",
-            "6": "Dirty"
+            "6": "Available"
         }
     },
     {
@@ -29,13 +29,13 @@
         "room_num": "103",
         "room_type": "Queen Kitchen",
         "days": {
-            "0": "Available",
-            "1": "Available",
-            "2": "Available",
-            "3": "Available",
-            "4": "Available",
-            "5": "Available",
-            "6": "Available"
+            "0": "Dirty",
+            "1": "Dirty",
+            "2": "Dirty",
+            "3": "Dirty",
+            "4": "Dirty",
+            "5": "Dirty",
+            "6": "Dirty"
         }
     },
     {
@@ -55,13 +55,13 @@
         "room_num": "201",
         "room_type": "King",
         "days": {
-            "0": "Available",
-            "1": "Available",
-            "2": "Available",
-            "3": "Available",
-            "4": "Available",
-            "5": "Available",
-            "6": "Available"
+            "0": "Dirty",
+            "1": "Dirty",
+            "2": "Dirty",
+            "3": "Dirty",
+            "4": "Dirty",
+            "5": "Dirty",
+            "6": "Dirty"
         }
     },
     {
@@ -81,26 +81,26 @@
         "room_num": "203",
         "room_type": "Queen Kitchen",
         "days": {
-            "0": "Available",
-            "1": "Available",
-            "2": "Available",
-            "3": "Available",
-            "4": "Available",
-            "5": "Available",
-            "6": "Available"
+            "0": "Maintenance",
+            "1": "Maintenance",
+            "2": "Maintenance",
+            "3": "Maintenance",
+            "4": "Maintenance",
+            "5": "Maintenance",
+            "6": "Maintenance"
         }
     },
     {
         "room_num": "204",
         "room_type": "Suite",
         "days": {
-            "0": "Available",
-            "1": "Available",
-            "2": "Available",
-            "3": "Available",
-            "4": "Available",
-            "5": "Available",
-            "6": "Available"
+            "0": "Maintenance",
+            "1": "Maintenance",
+            "2": "Maintenance",
+            "3": "Maintenance",
+            "4": "Maintenance",
+            "5": "Maintenance",
+            "6": "Maintenance"
         }
     },
     {
@@ -159,13 +159,13 @@
         "room_num": "401",
         "room_type": "King",
         "days": {
-            "0": "Available",
-            "1": "Available",
-            "2": "Available",
-            "3": "Available",
-            "4": "Available",
-            "5": "Available",
-            "6": "Available"
+            "0": "Dirty",
+            "1": "Dirty",
+            "2": "Dirty",
+            "3": "Dirty",
+            "4": "Dirty",
+            "5": "Dirty",
+            "6": "Dirty"
         }
     },
     {
