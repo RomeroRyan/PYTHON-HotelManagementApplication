@@ -11,7 +11,8 @@ class Guest:
             img_path="NULL",
             rm_number="NULL",
             chk_in="NULL",
-            chk_out="NULL"
+            chk_out="NULL",
+            paid_total="NULL"
     ):
         self.fname = fname
         self.lname = lname
@@ -24,6 +25,7 @@ class Guest:
         self.rm_number = rm_number
         self.chk_in = chk_in
         self.chk_out = chk_out
+        self.paid_total = paid_total
 
     def get_fname(self):
         return self.fname

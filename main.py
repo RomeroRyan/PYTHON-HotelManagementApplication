@@ -103,7 +103,7 @@ def main():
     capability_three = CapabilityThree(frame3, my_tabs, frame6)
     capability_four = CapabilityFour(frame4)
     capability_five = CapabilityFive(frame5, guests[0].get_id())
-    capability_six = CapabilitySix(frame6)
+    capability_six = CapabilitySix(frame6, my_tabs)
     capability_seven = CapabilitySeven(frame7)
     capability_eight = CapabilityEight(frame8)
 
@@ -131,7 +131,7 @@ def main():
     my_tabs.add(frame3, text="Reservation")
     my_tabs.add(frame4, text="Housekeeping")
     my_tabs.add(frame5, text="Guest Profile")
-    my_tabs.add(frame6, text="All Guest")
+    my_tabs.add(frame6, text="Guest info")
     my_tabs.add(frame7, text="Guest search")
     my_tabs.add(frame8, text="Report")
 

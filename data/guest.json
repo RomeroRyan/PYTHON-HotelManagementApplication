@@ -10,7 +10,8 @@
         "img_path": "./res/placeholder.png",
         "rm_number": "101",
         "chk_in": "02/28/2021",
-        "chk_out": "03/01/2021"
+        "chk_out": "03/01/2021",
+        "paid_total": "400"
     },
     {
         "fname": "BRITTANY",
@@ -23,7 +24,8 @@
         "img_path": "./res/placeholder.png",
         "rm_number": "402",
         "chk_in": "02/28/2021",
-        "chk_out": "03/01/2021"
+        "chk_out": "03/01/2021",
+        "paid_total": "400"
     },
     {
         "fname": "JAMES",
@@ -36,7 +38,8 @@
         "img_path": "./res/placeholder.png",
         "rm_number": "300",
         "chk_in": "02/27/2021",
-        "chk_out": "03/05/2021"
+        "chk_out": "03/05/2021",
+        "paid_total": "400"
     },
     {
         "fname": "JANE",
@@ -49,7 +52,8 @@
         "img_path": "./res/placeholder.png",
         "rm_number": "303",
         "chk_in": "04/10/2021",
-        "chk_out": "04/20/2021"
+        "chk_out": "04/20/2021",
+        "paid_total": "400"
     },
     {
         "fname": "PETER",
@@ -62,6 +66,33 @@
         "img_path": "./res/placeholder.png",
         "rm_number": "507",
         "chk_in": "04/20/2021",
-        "chk_out": "04/25/2021"
+        "chk_out": "04/25/2021",
+        "paid_total": "650"
+    },
+    {
+        "fname": "234",
+        "lname": "234",
+        "phone": "23",
+        "rm_number": "102",
+        "address": "23",
+        "email": "23",
+        "chk_in": "09/09/2021",
+        "chk_out": "09/10/2021",
+        "id": "23",
+        "vehicle": "234",
+        "img_path": ".res/placeholder.png"
+    },
+    {
+        "fname": "234",
+        "lname": "234",
+        "phone": "23",
+        "rm_number": "102",
+        "address": "23",
+        "email": "23",
+        "chk_in": "09/09/2021",
+        "chk_out": "09/10/2021",
+        "id": "23",
+        "vehicle": "234",
+        "img_path": ".res/placeholder.png"
     }
 ]
