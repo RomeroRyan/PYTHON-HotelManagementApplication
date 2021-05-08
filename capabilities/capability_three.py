@@ -158,7 +158,7 @@ class CapabilityThree:
         self.current_state.append(total_charge_value)
 
         check_availability = tk.Button(self.frame, text="Check Availability", command=lambda room=room_type_entry,
-                                        check_in=check_in_entry, check_out=check_out_entry: self.room_is_available(room, check_in, check_out, convert=True))
+                                        check_in=check_in_entry, check_out=check_out_entry: self.check_availability(room, check_in, check_out))
         check_availability.grid(row = 15, column = 1, padx=15, pady=15)
         self.current_state.append(check_availability)
         
