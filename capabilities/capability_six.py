@@ -27,23 +27,23 @@ class CapabilitySix:
         remain_label = tk.Label(frame, text="Balance:")
         remain_label.grid(row=7, column = 0)
 
-        gname = tk.Label(frame, width=30, text="John Win",bg='#C4C4C4')
+        gname = tk.Label(frame, width=30, text="",bg='#C4C4C4', name="name")
         gname.grid(row=1, column=1, padx=20)
 
-        checkin = tk.Label(frame, width=30, text="03/26/2021",bg='#C4C4C4')
+        checkin = tk.Label(frame, width=30, text="",bg='#C4C4C4', name="check_in")
         checkin.grid(row=2, column=1)
 
-        checkout = tk.Label(frame, width=30, text="03/30/2021",bg='#C4C4C4')
+        checkout = tk.Label(frame, width=30, text="",bg='#C4C4C4', name="check_out")
         checkout.grid(row=3, column=1)
 
-        roomrate = tk.Label(frame, width=30, text="$100/night",bg='#C4C4C4')
+        roomrate = tk.Label(frame, width=30, text="",bg='#C4C4C4', name="rate")
         roomrate.grid(row=4, column=1)
 
-        total = tk.Label(frame, width=30, text = "$ 400",bg='#C4C4C4')
+        total = tk.Label(frame, width=30, text = "",bg='#C4C4C4', name="total")
         total.grid(row=5, column=1)
 
-        paid = tk.Label(frame, width=30, text = "$ 150",bg='#C4C4C4')
+        paid = tk.Label(frame, width=30, text = "",bg='#C4C4C4', name="paid")
         paid.grid(row=6, column=1)
 
-        remain = tk.Label(frame, width=30, text = "$ 250", bg='#C4C4C4')
+        remain = tk.Label(frame, width=30, text = "", bg='#C4C4C4', name="remain")
         remain.grid(row=7, column=1)

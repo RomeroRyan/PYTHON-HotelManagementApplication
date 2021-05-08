@@ -46,19 +46,19 @@ class CapabilityFive:
                                  anchor='w', width=20).grid(row=9, column=0, padx=15, pady=5)
 
         # create the fields
-        self.fname_field = tk.Entry(self.frame)
+        self.fname_field = tk.Entry(self.frame, name="fname")
         self.fname_field.grid(row=3, column=1, padx=15, pady=5)
-        self.lname_field = tk.Entry(self.frame)
+        self.lname_field = tk.Entry(self.frame, name="lname")
         self.lname_field.grid(row=4, column=1, padx=15, pady=5)
-        self.phone_field = tk.Entry(self.frame)
+        self.phone_field = tk.Entry(self.frame, name="phone")
         self.phone_field.grid(row=5, column=1, padx=15, pady=5)
-        self.address_field = tk.Entry(self.frame)
+        self.address_field = tk.Entry(self.frame, name="address")
         self.address_field.grid(row=6, column=1, padx=15, pady=5)
-        self.email_field = tk.Entry(self.frame)
+        self.email_field = tk.Entry(self.frame, name="email")
         self.email_field.grid(row=7, column=1, padx=15, pady=5)
-        self.id_field = tk.Entry(self.frame)
+        self.id_field = tk.Entry(self.frame, name="id")
         self.id_field.grid(row=8, column=1, padx=15, pady=5)
-        self.vehicle_field = tk.Entry(self.frame)
+        self.vehicle_field = tk.Entry(self.frame, name="license")
         self.vehicle_field.grid(row=9, column=1, padx=15, pady=5)
         self.populate_fields()
 
@@ -163,7 +163,8 @@ class CapabilityFive:
                               self.email_field.get(), self.id_field.get(), self.vehicle_field.get(), self.filename]
             message_label = tk.Label(
                 self.frame, text="Changes saved to database.").grid(row=11, column=0, padx=15, pady=5)
-            update_guest(self.current_guestid, changed_fields)
-
             if self.current_guestid != self.id_field.get():
                 self.current_guestid = self.id_field.get()
+                
+            update_guest(self.current_guestid, changed_fields)
+
