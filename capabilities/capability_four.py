@@ -12,20 +12,26 @@ except ImportError:
     except ImportError:
         print("Could not import tkinter!")
 
+
 # =================================================================================================================
 class CapabilityFour:
     def __init__(self, frame):
         self.frame = frame
         self.room_list = get_hotel_rooms()       # holds list of rooms objects
         self.room_frames = []                    # holds list of newly created frames (each represent a room)
+        # -------------------------------------------------------------------------------------------
+        # CREATE AND SET STATIC WIDGETS (title, reload button)
 
-        # ----------------------------------------------------------------------------
-        # CAPABILITY 4: create and set title label
+        # create
         title = tk.Label(self.frame, text="HouseKeeping", font=("Times", 30, "bold"))
+        reload_button = tk.Button(self.frame, bg="#D9D9D9", text="Reload Tab", font=("Times", 20), padx=15,
+                                  command=self.reset_capability)
+        # set
         title.grid(row=0, column=0, sticky="W", padx=120)
+        reload_button.grid(row=0, column=1)
 
-        # ----------------------------------------------------------------------------
-        # CAPABILITY 4: create frames for each individual room (add it to list room_frames)
+        # -------------------------------------------------------------------------------------------
+        # CREATE ROOM FRAMES (each frame representing each individual room in the hotel)
         for index, room_obj in enumerate(self.room_list):
             # create frame for each room_obj
             room_frame_label = tk.LabelFrame(self.frame, padx=5, pady=5, bg='#C4C4C4')
@@ -38,10 +44,10 @@ class CapabilityFour:
             # append all room frames into list (both displayed and not displayed to still have access to them)
             self.room_frames.append(room_frame_label)
 
-        # ----------------------------------------------------------------------------
-        # CAPABILITY 4: create & sets widgets for each room frame that was created
+        # -------------------------------------------------------------------------------------------
+        # CREATE AND SET WIDGETS FOR EACH ROOM FRAME THAT WAS CREATED
         for index, room_obj in enumerate(self.room_list):
-            # creat label for room number and room status
+            # create labels
             room_num = tk.Label(self.room_frames[index],
                                 text=room_obj.get_room_combo_name(),
                                 font=("Times", 14, "bold"), bg='#C4C4C4')
@@ -49,35 +55,35 @@ class CapabilityFour:
                                    text="Status: " + room_obj.get_room_status())
 
             # create variable holder for each of the checkboxes
-            bathroom_check = tk.IntVar()
-            towels_check = tk.IntVar()
-            vacuum_check = tk.IntVar()
-            dust_check = tk.IntVar()
-            bed_check = tk.IntVar()
-            electronic_check = tk.IntVar()
+            bathroom_value = tk.IntVar()
+            towels_value = tk.IntVar()
+            vacuum_value = tk.IntVar()
+            dust_value = tk.IntVar()
+            bed_value = tk.IntVar()
+            electronic_value = tk.IntVar()
 
             # create checkboxes
-            bathroom = tk.Checkbutton(self.room_frames[index], text="Bathroom", variable=bathroom_check,
+            bathroom = tk.Checkbutton(self.room_frames[index], text="Bathroom", variable=bathroom_value,
                                       bg='#C4C4C4', onvalue=1, offvalue=0)
-            towels = tk.Checkbutton(self.room_frames[index], text="Towels", variable=towels_check,
+            towels = tk.Checkbutton(self.room_frames[index], text="Towels", variable=towels_value,
                                     bg='#C4C4C4', onvalue=1, offvalue=0)
-            vacuum = tk.Checkbutton(self.room_frames[index], text="Vacuum", variable=vacuum_check,
+            vacuum = tk.Checkbutton(self.room_frames[index], text="Vacuum", variable=vacuum_value,
                                     bg='#C4C4C4', onvalue=1, offvalue=0)
-            dust = tk.Checkbutton(self.room_frames[index], text="Dusting", variable=dust_check,
+            dust = tk.Checkbutton(self.room_frames[index], text="Dusting", variable=dust_value,
                                   bg='#C4C4C4', onvalue=1, offvalue=0)
-            bed = tk.Checkbutton(self.room_frames[index], text="Bed", variable=bed_check,
+            bed = tk.Checkbutton(self.room_frames[index], text="Bed", variable=bed_value,
                                  bg='#C4C4C4', onvalue=1, offvalue=0)
-            electronic = tk.Checkbutton(self.room_frames[index], text="Electronic", variable=electronic_check,
+            electronic = tk.Checkbutton(self.room_frames[index], text="Electronic", variable=electronic_value,
                                         bg='#C4C4C4', onvalue=1, offvalue=0)
             # -------------------------------------------------------------------------------------------
             # create button that change room's status
             #   confirm - will check if all boxes are checked, if so, will change room's status to "Available
             #   maintenance - allows user to change room status to  "maintenance" (requirement of iteration 2)
             confirm_button = tk.Button(self.room_frames[index], text="Confirm", padx=25,
-                                    command=lambda bathroom=bathroom_check, towels=towels_check, vacuum=vacuum_check,
-                                                   dust=dust_check, bed=bed_check, electronic=electronic_check,
-                                                   index=index: self.confirm_button(bathroom, towels, vacuum, dust,
-                                                                                   bed, electronic, index))
+                                       command=lambda bathroom=bathroom_value, towels=towels_value,
+                                                      vacuum=vacuum_value, dust=dust_value, bed=bed_value,
+                                                      electronic=electronic_value, index=index:
+                                       self.confirm_button(bathroom, towels, vacuum, dust, bed, electronic, index))
             maintenance_button = tk.Button(self.room_frames[index], text="Maintenance?", padx=25,
                                            command=lambda index=index: self.maintenance_button(index))
 
@@ -92,14 +98,14 @@ class CapabilityFour:
             electronic.grid(row=1, column=4, padx=5, pady=5, sticky="W")
             confirm_button.grid(row=2, column=0, padx=5, pady=5)
             maintenance_button.grid(row=2, column=2, columnspan=2, padx=5, pady=5)
-
     # END OF INITIALIZER
-    # =========================================================================================================
-    # CAPABILITY 4: button action (confirm button only)
+
+# =================================================================================================================
+    # BUTTON WAS CLICK (Confirm button only)
     #   will check if all boxes are checked
     #   if all boxes are checked, room is clean, will ask user if they wish to change room's status to "Available"
-    #       if yes, will update room's status with function call change_status()
-    #   if not all boxes are checked, does nothing
+    #   if true, performs change_status(), passing in "Available"
+    #   if false, does nothing
     def confirm_button(self, bathroom, towels, vacuum, dust, bed, electronic, index):
         if(bathroom.get() == 1 and towels.get() == 1 and vacuum.get() == 1 and
            dust.get() == 1 and bed.get() == 1 and electronic.get() == 1):
@@ -123,10 +129,10 @@ class CapabilityFour:
             # not all checkboxes r check, do nothing.
             pass
 
-    # =========================================================================================================
-    # CAPABILITY 4: button action (maintenance button only)
+    # ---------------------------------------------------------------------------------------------------------
+    # BUTTON WAS CLICK (Maintenance button only)
     #   will ask user if they wish to change room's status to "Maintenance"
-    #   if yes, will update room's status with function call change_status()
+    #   if yes, will perform change_status(), passing in "Maintenance"
     #   if no, does nothing
     def maintenance_button(self, index):
         # create popup
@@ -146,10 +152,10 @@ class CapabilityFour:
         no_button.grid(row=1, column=1)
         popup.mainloop()
 
-    # =========================================================================================================
-    # CAPABILITY 4: user has click yes on updating status on either Confirm or Maintenance button
-    #   will update the room status with the status string that was passed in
-    #   delete all widgets and variables and re-initialize capability 4
+    # ---------------------------------------------------------------------------------------------------------
+    # USER CLICK "Yes" (changes room's status)
+    #   update the room's status to "Available" or "Maintenance" based on which button was press
+    #   performs rest_capability()
     def change_status(self, popup, index, status):
         # change room status
         new_status = status
@@ -159,7 +165,15 @@ class CapabilityFour:
                                                   self.room_list[index].get_room_status()))
         # destroy popup
         popup.destroy()
+        # reset capability
+        self.reset_capability()
 
+    # ---------------------------------------------------------------------------------------------------------
+    # RESET THE TAB (by destroying it and re-initializing the capability)
+    #   only runs after capability modify a room's status
+    #   or user click on reload button, manually resetting tab
+    def reset_capability(self):
+        print("Reload Frame!")
         # destroy all widgets in capability 4
         for widget in self.frame.winfo_children():
             widget.destroy()
@@ -169,4 +183,3 @@ class CapabilityFour:
         del self.room_frames
         # re-initialize capability 4
         CapabilityFour(self.frame)
-
