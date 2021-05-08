@@ -173,7 +173,6 @@ class CapabilityFour:
     #   only runs after capability modify a room's status
     #   or user click on reload button, manually resetting tab
     def reset_capability(self):
-        print("Reload Frame!")
         # destroy all widgets in capability 4
         for widget in self.frame.winfo_children():
             widget.destroy()
