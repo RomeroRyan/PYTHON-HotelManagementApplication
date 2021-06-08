@@ -4,6 +4,8 @@ Jacob Powell - (Contact info here) </br>
 Blue Bayani - https://github.com/bluebayani </br>
 Hounghuy Hourt - (Contact info here) </br>
 
+To view the original repository for this college project, please go to this link: https://github.com/CSUF-CPSC-463/project_2
+
 ## Limitations
 1. In order to run this software you need python3
 2. Tkinter does not seem to be working as intended on macOS, so if possible run this software on Windows/Linux. 
