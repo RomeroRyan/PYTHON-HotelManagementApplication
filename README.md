@@ -2,7 +2,7 @@
 Ryan Romero - r.romero.softwaredev@gmail.com </br>
 Jacob Powell - (Contact info here) </br>
 Blue Bayani - https://github.com/bluebayani </br>
-Hounghuy Hourt - (Contact info here) </br>
+Hounghuy Hourt - hounghuy123@csu.fullerton.edu </br>
 
 To view the original repository for this college project, please go to this link: https://github.com/CSUF-CPSC-463/project_2
 
