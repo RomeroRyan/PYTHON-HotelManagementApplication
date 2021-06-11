@@ -1,6 +1,6 @@
-# CPSC 463 Project 2 - Hotel Management Software
+# CPSC 463 Project 2 - Hotel Management Software (Contact Info)
 Ryan Romero - r.romero.softwaredev@gmail.com </br>
-Jacob Powell - (Contact info here) </br>
+Jacob Powell - https://github.com/Scout2012 </br>
 Blue Bayani - https://github.com/bluebayani </br>
 Hounghuy Hourt - hounghuy123@csu.fullerton.edu </br>
 
