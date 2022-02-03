@@ -10,10 +10,10 @@ To view the original repository for this college project, please go to this link
 TODO
 
 # The hotel management software supports the following capabilities
-- Capability 1 (Ryan): Screen that shows all rooms and their current status.
+- Capability 1 (**Ryan**): Screen that shows all rooms and their current status.
 - Capability 2 (Jacob): Screen showing a list of the rooms and who is staying in the room for each day for the next 7 days.
 - Capability 3 (Jacob): Customer Reservation Screen
-- Capability 4 (Ryan): A housekeeping screen to manage housekeeping
+- Capability 4 (**Ryan**): A housekeeping screen to manage housekeeping
 - Capability 5 (Blue): A guest profile screen to show guest information
 - Capability 6 (Hounghuy): Current stay screen showing a guest’s information for their current stay.
 - Capability 7 (Blue): A search screen to search for guests
