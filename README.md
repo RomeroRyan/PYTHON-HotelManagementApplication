@@ -25,8 +25,7 @@ In order to run this software, you need to have python3.
 2. Using the command line, navigate to the project folder and run the following command: ```python3 main.py```
 
 ## Limitations (My Capabilities Only)
-1. In order to run this software you need python3
-2. Tkinter does not seem to be working as intended on macOS, so if possible run this software on Windows/Linux. 
-3. Limitation of capability 1 and 4: requires manual reloading of the tabs when room status is change on a different tab. (can be done with the reload button)
-4. Limitation of capability 4: must hit confirm button after all checkboxes for a certain room in order to change the room's status to "Available"
-5. Limitation of capability 4: every time this tab is reloaded, forgets checkboxes that were left previously checked (it either all boxes must be checked or nothing happens)
+1. Tkinter does not seem to be working as intended on macOS, so if possible, run this software on Windows/Linux. 
+2. Limitation of capability 1 and 4: requires manual reloading of the tabs when room status is change on a different tab. (can be done with the reload button)
+3. Limitation of capability 4: must hit confirm button after all checkboxes for a certain room in order to change the room's status to "Available"
+4. Limitation of capability 4: every time this tab is reloaded, forgets checkboxes that were left previously checked (it either all boxes must be checked or nothing happens)
